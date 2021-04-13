@@ -19,6 +19,13 @@ var urls {
     'https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver':{
         'IntersectionObserver':[window]
     }
+    'https://polyfill.io/v3/polyfill.min.js?features=AbortController':{
+        'AbortController':[window]
+    }
+    'https://polyfill.io/v3/polyfill.min.js?features=URL':{
+        'URL':[window]
+        'URLSearchParams':[window]
+    }
 };
     
 var url, props, prop, obj, objects;
