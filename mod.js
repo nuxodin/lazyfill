@@ -1,11 +1,11 @@
-!function(window, document){
+!function(window, document){ 'use strict';
 
 var urls = {
     'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/fetch.js':{
         'fetch':[window],
-        'Headers':[window],
-        'Request':[window],
-        'Response':[window],
+        //'Headers':[window],
+        //'Request':[window],
+        //'Response':[window],
     },
     'cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js':{
         'Promise':[window]
@@ -13,44 +13,31 @@ var urls = {
     'polyfill.io/v3/polyfill.min.js?features=IntersectionObserver':{
         'IntersectionObserver':[window]
     },
+    'polyfill.io/v3/polyfill.min.js?features=ResizeObserver':{
+        'ResizeObserver':[window]
+    },
     'polyfill.io/v3/polyfill.min.js?features=AbortController':{
-        'AbortController':[window]
+        'AbortController':[window],
+        //'AbortSignal': [window]
     },
     'polyfill.io/v3/polyfill.min.js?features=URL':{
-        'URL':[window],
+        'URL':[window], // ie11: this will not work as it has "URL" but not as a constructor, what should we do?
         'URLSearchParams':[window]
-    },
-    'polyfill.io/v3/polyfill.js?features=ResizeObserver':{
-        'ResizeObserver':[window]
     },
     'unpkg.com/@ungap/weakset':{
         'WeakSet':[window]
     },
-    'unpkg.com/@ungap/custom-elements/es.js':{
-        'customElements':[window]
+    'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
+        'customElements':[document]
     },
-    'unpkg.com/@ungap/item':{
-        'item':[Array.prototype]
-    }
-    /*
-    'polyfill.io/v3/polyfill.min.js?features=es2021':{
-        'keys':[Object],
-        'flags':[RegExp.prototype],
-        'Symbol':[window],
-        //'replace':[Symbol],
-        'Symbol':[window],
-        'replaceAll':[String.prototype],
-    }
-    */
 };
 
-/*
-They have internal depencies :(
-var ftPolyfills = {
+var lazyfills = {
     Array:{
         from:1,
         of:1,
         prototype:{
+            at:1,
             copyWithin:1,
             entries:1,
             fill:1,
@@ -63,17 +50,21 @@ var ftPolyfills = {
             values:1,
         }
     },
-    Element:{
-        prototype:{
-            toggleAttribute:1,
-        }
-    },
     String:{
         fromCodePoint:1,
-
+        prototype:{
+            at:1,
+            codePointAt:1,
+            endsWith:1,
+            includes:1,
+            padEnd:1,
+            padStart:1,
+            repeat:1,
+            startsWith:1
+        }
     }
 };
-function ftFill(obj, realObj, rootUrl){
+function createUrls(obj, realObj, rootUrl){
     var prop;
     for (prop in obj) {
         if (obj[prop] === 1) {
@@ -82,12 +73,11 @@ function ftFill(obj, realObj, rootUrl){
             urls[url] = {};
             urls[url][prop] = [realObj];
         } else {
-            ftFill(obj[prop], realObj[prop], rootUrl + prop + '/');
+            createUrls(obj[prop], realObj[prop], rootUrl + prop + '.js');
         }
     }
 }
-ftFill(ftPolyfills, window, 'cdn.jsdelivr.net/gh/Financial-Times/polyfill-library@3/polyfills/');
-*/
+createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.1/polyfills/');
 
 
 var url, props, prop, obj, objects, i;
@@ -97,7 +87,7 @@ for (url in urls) {
         objects = props[prop];
         for (i=0; obj=objects[i++];) {
             if (prop in obj) {
-                //console.log('not needed '+prop+' in '+url+'<br>')
+                console.log('not needed '+prop+' in '+url+'<br>')
                 continue;
             }
             //console.log('"'+prop+'" not supported, adding getter');
@@ -115,12 +105,11 @@ function addGetter(obj, prop, url) {
         configurable: true,
         get: function() {
             delete obj[prop];
-            console.log(prop+' needed loading sync');
+            console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
             loadScriptSync('https://'+url);
-            //return c1Use.call(this, prop);
             return this[prop];
         },
-        set: function(v) { // needed?
+        set: function(v) {
             delete obj[prop];
             obj[prop] = v;
         }
