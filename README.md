@@ -7,7 +7,7 @@ Polyfill Service - the lazy way
 Add this script on the top of your page:
 
 ```html
-<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.2/mod.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.3/mod.min.js"></script>
 ```
 
 ## Resources
