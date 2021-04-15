@@ -50,6 +50,13 @@ var lazyfills = {
             values:1,
         }
     },
+    Math:{
+        trunc:1,
+        sign:1,
+    },
+    Number:{
+        isInteger:1
+    },
     String:{
         fromCodePoint:1,
         prototype:{
@@ -62,7 +69,9 @@ var lazyfills = {
             repeat:1,
             startsWith:1
         }
-    }
+    },
+    requestIdleCallback:1,
+    cancelIdleCallback:1,
 };
 function createUrls(obj, realObj, rootUrl){
     var prop;
