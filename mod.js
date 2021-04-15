@@ -38,6 +38,7 @@ var urls = {
     },
     'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.1/polyfills/Element/combo.js':{
         'matches':[Element],
+        'closest':[Element],
         'prepend':[Element],
         'append':[Element],
         'before':[Element],
