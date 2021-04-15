@@ -73,7 +73,7 @@ function createUrls(obj, realObj, rootUrl){
             urls[url] = {};
             urls[url][prop] = [realObj];
         } else {
-            createUrls(obj[prop], realObj[prop], rootUrl + prop);
+            createUrls(obj[prop], realObj[prop], rootUrl + prop + '/');
         }
     }
 }
