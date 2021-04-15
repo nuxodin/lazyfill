@@ -135,9 +135,9 @@ function createUrls(obj, realObj, rootUrl){
     for (prop in obj) {
         if (obj[prop] === 1) {
             var url = rootUrl + prop + '.min.js'
-			if (!urls[url]) urls[url] = {};
-			if (!urls[url][prop]) urls[url][prop] = [];
-            urls[url][prop] = [realObj];
+            if (!urls[url]) urls[url] = {};
+            if (!urls[url][prop]) urls[url][prop] = [];
+            urls[url][prop].push(realObj);
         } else {
             createUrls(obj[prop], realObj[prop], rootUrl + prop + '/');
         }
