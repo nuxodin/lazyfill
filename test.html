@@ -9,6 +9,8 @@
 </head>
 <body>
 
+
+
 <script style="display:block; white-space: pre-wrap; background:#eee; margin:1rem; padding:1rem;">
 var body = document.body;
 
@@ -22,7 +24,16 @@ setTimeout(function(){
 
   body.innerHTML += "result: "+item;
 
-  console.log(document.currentScript)
+
+
+  const korean = new Intl.Locale('ko', {
+    script: 'Kore', region: 'KR', hourCycle: 'h24', calendar: 'gregory'
+  });
+  const japanese = new Intl.Locale('ja-Jpan-JP-u-ca-japanese-hc-h12');
+  console.log(korean.baseName, japanese.baseName);
+  // expected output: "ko-Kore-KR" "ja-Jpan-JP"
+  console.log(korean.hourCycle, japanese.hourCycle);
+  // expected output: "h24" "h12"
 
 }, 1000)
 </script>

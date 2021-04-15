@@ -21,7 +21,8 @@ var poly = {
 		var parentNode = this.parentNode;
 		parentNode && parentNode.insertBefore(mutationMacro(arguments) , this.nextSibling);
 	},
-	replace: function replace() {
+	//replace: function replace() { // zzz
+	replaceWidth: function replace() {
 		var parentNode = this.parentNode;
 		parentNode && parentNode.replaceChild(mutationMacro(arguments), this);
 	},

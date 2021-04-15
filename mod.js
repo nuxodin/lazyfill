@@ -1,6 +1,15 @@
 !function(window, document){ 'use strict';
 
 var urls = {
+    'https://polyfill.io/v3/polyfill.min.js?features=Intl':{
+        formatToParts: [Intl.DateTimeFormat.prototype],
+        DisplayNames: [Intl],
+        ListFormat: [Intl],
+        Locale: [Intl],
+        PluralRules: [Intl],
+        RelativeTimeFormat: [Intl],
+        getCanonicalLocales: [Intl],
+    },
     'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/fetch.js':{
         'fetch':[window],
         //'Headers':[window],
@@ -33,7 +42,7 @@ var urls = {
         'append':[Element],
         'before':[Element],
         'after':[Element],
-        'replace':[Element],
+        'replaceWidth':[Element],
         'remove':[Element],
         // to use in SVGElement:
         'blur':[Element],
@@ -64,7 +73,8 @@ var lazyfills = {
         }
     },
     document:{
-        currentScript:1
+        currentScript:1,
+        caretRangeFromPoint:1,
     },
     Element:{
         toggleAttribute:1
@@ -141,7 +151,7 @@ for (url in urls) {
         objects = props[prop];
         for (i=0; obj=objects[i++];) {
             if (prop in obj) {
-                //console.log('not needed '+prop+' in '+url+'<br>')
+                console.log('not needed '+prop+' in '+url+'<br>')
                 continue;
             }
             //console.log('"'+prop+'" not supported, adding getter');
@@ -187,6 +197,19 @@ function loadScriptSync(path) {
 
 if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
 if (!document.scrollingElement) document.scrollingElement = document.documentElement; // ie11
+
+/* more *
+// iterators, available on ch/ff, not useable for ie11
+if (window.Symbol && Symbol.iterator) {
+	[HTMLCollection,NodeList,StyleSheetList,window.CSSRuleList].forEach(function(Interface){
+		if (!Interface) return;
+		var proto = Interface.prototype;
+		if (proto[Symbol.iterator]) return;
+        console.log('not needed on '+Interface)
+		proto[Symbol.iterator] = Array.prototype[Symbol.iterator];
+	});
+}
+/* */
 
 
 }(window, document);
