@@ -1,7 +1,7 @@
 !function(window, document){ 'use strict';
 
 var urls = {
-    'https://polyfill.io/v3/polyfill.min.js?features=Intl':{
+    'polyfill.io/v3/polyfill.min.js?features=Intl':{
         formatToParts: [Intl.DateTimeFormat.prototype],
         DisplayNames: [Intl],
         ListFormat: [Intl],
@@ -188,7 +188,7 @@ function loadScriptSync(path) {
         var elem = document.createElement('script');
         elem.text = request.responseText;
         document.documentElement.firstChild.appendChild(elem);
-        elem.setAttribute('data-c1-src',path);
+        elem.setAttribute('data-src',path);
     } else {
         console.warn('failed to load '+path)
     }
