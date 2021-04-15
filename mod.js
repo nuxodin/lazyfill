@@ -27,7 +27,7 @@ var urls = {
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
         'customElements':[window],
     },
-    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.3/polyfills/Element/combo.js':{
+    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.4/polyfills/Element/combo.js':{
         'matches':[Element],
         'prepend':[Element],
         'append':[Element],
@@ -131,7 +131,7 @@ function createUrls(obj, realObj, rootUrl){
         }
     }
 }
-createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.3/polyfills/');
+createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.4/polyfills/');
 
 
 var url, props, prop, obj, objects, i;
