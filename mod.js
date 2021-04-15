@@ -21,14 +21,27 @@ var urls = {
         //'AbortSignal': [window]
     },
     'polyfill.io/v3/polyfill.min.js?features=URL':{
-        'URL':[window], // ie11: this will not work as it has "URL" but not as a constructor, what should we do?
+        //'URL':[window], // ie11: this will not work as it has "URL" but not as a constructor, what should we do?
         'URLSearchParams':[window]
     },
-    'unpkg.com/@ungap/weakset':{
-        'WeakSet':[window]
-    },
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
-        'customElements':[document]
+        'customElements':[window],
+    },
+    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.3/polyfills/Element/combo.js':{
+        'matches':[Element],
+        'prepend':[Element],
+        'append':[Element],
+        'before':[Element],
+        'after':[Element],
+        'replace':[Element],
+        'remove':[Element],
+        // to use in SVGElement:
+        'blur':[Element],
+        'focus':[Element],
+        'contains':[Element],
+        'classList':[Element],
+        'getElementsByClassName':[Element],
+        'children':[Element],
     },
 };
 
@@ -50,12 +63,38 @@ var lazyfills = {
             values:1,
         }
     },
+    document:{
+        currentScript:1
+    },
+    Element:{
+        toggleAttribute:1
+    },
+    HTMLFormElement:{
+        prototype:{
+            reportValidity:1,
+            requestSubmit:1,
+        }
+    },
+    HTMLInputElement:{
+        prototype:{
+            reportValidity:1
+        }
+    },
     Math:{
         trunc:1,
         sign:1,
     },
     Number:{
         isInteger:1
+    },
+    Object:{
+        assign:1,
+        is:1,
+        values:1,
+    },
+    Promise:{
+        allSettled:1,
+        any:1
     },
     String:{
         fromCodePoint:1,
@@ -70,15 +109,21 @@ var lazyfills = {
             startsWith:1
         }
     },
+    SVGStyleElement:{
+        prototype:{
+            sheet:1
+        }
+    },
     requestIdleCallback:1,
     cancelIdleCallback:1,
+    WeakSet:1,
 };
+
 function createUrls(obj, realObj, rootUrl){
     var prop;
     for (prop in obj) {
         if (obj[prop] === 1) {
-            var url = rootUrl + prop + '.js'
-            //addGetter(realObj, prop, url);
+            var url = rootUrl + prop + '.min.js'
             urls[url] = {};
             urls[url][prop] = [realObj];
         } else {
@@ -96,7 +141,7 @@ for (url in urls) {
         objects = props[prop];
         for (i=0; obj=objects[i++];) {
             if (prop in obj) {
-                console.log('not needed '+prop+' in '+url+'<br>')
+                //console.log('not needed '+prop+' in '+url+'<br>')
                 continue;
             }
             //console.log('"'+prop+'" not supported, adding getter');
@@ -138,6 +183,10 @@ function loadScriptSync(path) {
         console.warn('failed to load '+path)
     }
 }
+
+
+if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
+if (!document.scrollingElement) document.scrollingElement = document.documentElement; // ie11
 
 
 }(window, document);

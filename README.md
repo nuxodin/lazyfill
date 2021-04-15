@@ -17,3 +17,5 @@ https://github.com/behnammodi/polyfill
 https://polyfill.io/v3/
 
 https://ungap.github.io/
+
+https://github.com/Sylvain59650/all-polyfills
