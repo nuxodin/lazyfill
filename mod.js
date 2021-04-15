@@ -86,7 +86,7 @@ function createUrls(obj, realObj, rootUrl){
         }
     }
 }
-createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.2/polyfills/');
+createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.3/polyfills/');
 
 
 var url, props, prop, obj, objects, i;
