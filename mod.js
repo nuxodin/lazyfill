@@ -37,21 +37,21 @@ var urls = {
         'customElements':[window],
     },
     'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.1/polyfills/Element/combo.js':{
-        'matches':[Element],
-        'closest':[Element],
-        'prepend':[Element],
-        'append':[Element],
-        'before':[Element],
-        'after':[Element],
-        'replaceWidth':[Element],
-        'remove':[Element],
+        'matches':[Element.prototype],
+        'closest':[Element.prototype],
+        'prepend':[Element.prototype],
+        'append':[Element.prototype],
+        'before':[Element.prototype],
+        'after':[Element.prototype],
+        'replaceWidth':[Element.prototype],
+        'remove':[Element.prototype],
         // to use in SVGElement:
-        'blur':[Element],
-        'focus':[Element],
-        'contains':[Element],
-        'classList':[Element],
-        'getElementsByClassName':[Element],
-        'children':[Element],
+        'blur':[Element.prototype],
+        'focus':[Element.prototype],
+        'contains':[Element.prototype],
+        'classList':[Element.prototype],
+        'getElementsByClassName':[Element.prototype],
+        'children':[Element.prototype],
     },
 };
 
@@ -143,6 +143,7 @@ function createUrls(obj, realObj, rootUrl){
         }
     }
 }
+console.log(urls)
 createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.1/polyfills/');
 
 
