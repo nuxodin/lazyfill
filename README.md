@@ -1,6 +1,6 @@
 # lazyfill
 
-Polyfill Service the easy way
+Polyfill Service - the lazy way
 
 
 # Ussage
