@@ -68,12 +68,12 @@ function createUrls(obj, realObj, rootUrl){
     var prop;
     for (prop in obj) {
         if (obj[prop] === 1) {
-            var url = rootUrl + prop + '/polyfill.js'
+            var url = rootUrl + prop + '.js'
             //addGetter(realObj, prop, url);
             urls[url] = {};
             urls[url][prop] = [realObj];
         } else {
-            createUrls(obj[prop], realObj[prop], rootUrl + prop + '.js');
+            createUrls(obj[prop], realObj[prop], rootUrl + prop);
         }
     }
 }
