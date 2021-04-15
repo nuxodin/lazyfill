@@ -36,7 +36,7 @@ var urls = {
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
         'customElements':[window],
     },
-    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.4/polyfills/Element/combo.js':{
+    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.0/polyfills/Element/combo.js':{
         'matches':[Element],
         'prepend':[Element],
         'append':[Element],
@@ -141,7 +141,7 @@ function createUrls(obj, realObj, rootUrl){
         }
     }
 }
-createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.0.4/polyfills/');
+createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.0/polyfills/');
 
 
 var url, props, prop, obj, objects, i;
@@ -151,7 +151,7 @@ for (url in urls) {
         objects = props[prop];
         for (i=0; obj=objects[i++];) {
             if (prop in obj) {
-                console.log('not needed '+prop+' in '+url+'<br>')
+                //console.log('not needed '+prop+' in '+url+'<br>')
                 continue;
             }
             //console.log('"'+prop+'" not supported, adding getter');
