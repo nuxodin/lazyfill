@@ -160,6 +160,7 @@ for (url in urls) {
         }
     }
 }
+console.log('lazyfill: everything is polyfilled');
 
 //addGetter(window, 'fetch', 'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/fetch.js');
 
