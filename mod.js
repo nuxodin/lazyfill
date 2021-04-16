@@ -36,7 +36,8 @@ var urls = {
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
         'customElements':[window],
     },
-    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.7/polyfills/Element/combo.js':{
+    /*
+    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.8/polyfills/Element/combo.js':{
         'matches':[Element.prototype],
         'closest':[Element.prototype],
         'prepend':[Element.prototype],
@@ -53,7 +54,24 @@ var urls = {
         'getElementsByClassName':[Element.prototype],
         'children':[Element.prototype],
     },
+    */
 };
+addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.8/polyfills/Element/combo.js', {
+    matches:1,
+    closest:1,
+    prepend:1,
+    append:1,
+    before:1,
+    after:1,
+    replaceWidth:1,
+    remove:1,
+    blur:1, // to use in SVGElement:
+    focus:1,
+    contains:1,
+    classList:1,
+    getElementsByClassName:1,
+    children:1,
+}, Element.prototype);
 
 var lazyfills = {
     Array:{
@@ -129,8 +147,7 @@ var lazyfills = {
     cancelIdleCallback:1,
     WeakSet:1,
 };
-
-function createUrls(obj, realObj, rootUrl){
+function addFsStruct(obj, realObj, rootUrl){
     var prop;
     for (prop in obj) {
         if (obj[prop] === 1) {
@@ -139,12 +156,11 @@ function createUrls(obj, realObj, rootUrl){
             if (!urls[url][prop]) urls[url][prop] = [];
             urls[url][prop].push(realObj);
         } else {
-            createUrls(obj[prop], realObj[prop], rootUrl + prop + '/');
+            addFsStruct(obj[prop], realObj[prop], rootUrl + prop + '/');
         }
     }
 }
-
-createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.7/polyfills/');
+addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.8/polyfills/');
 
 
 var url, props, prop, obj, objects, i;
@@ -166,15 +182,24 @@ console.log('lazyfill: getters added');
 
 //addGetter(window, 'fetch', 'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/fetch.js');
 
+function addCombo(url, obj, target) {
+    if (!urls[url]) urls[url] = {};
+    for (prop in obj) {
+        if (obj[prop] === 1) {
+            if (!urls[url][prop]) urls[url][prop] = [];
+            urls[url][prop].push(target);
+        } else {
+            addCombo(url, obj[prop], target[prop]);
+        }
+    }
+}
 function addGetter(obj, prop, url) {
     if (obj.hasOwnProperty(prop)) return;
     /* other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire */
     Object.defineProperty(obj, prop, {
         configurable: true,
         get: function() {
-
-            //try { throw new Error(); } catch (e) { console.log(e.stack) }
-
+            //try { throw new Error(); } catch (e) { console.log(e.stack) } // track where it has been added
             delete obj[prop];
             console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
             loadScriptSync('https://'+url);
@@ -201,7 +226,7 @@ function loadScriptSync(path) {
     }
 }
 
-
+/* very small polyfills, they are not worth adding to the service */
 if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
 if (!document.scrollingElement) document.scrollingElement = document.documentElement; // ie11
 
