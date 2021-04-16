@@ -37,7 +37,7 @@ var urls = {
         'customElements':[window],
     },
     /*
-    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.8/polyfills/Element/combo.js':{
+    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.9/polyfills/Element/combo.js':{
         'matches':[Element.prototype],
         'closest':[Element.prototype],
         'prepend':[Element.prototype],
@@ -56,7 +56,7 @@ var urls = {
     },
     */
 };
-addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.8/polyfills/Element/combo.js', {
+addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.9/polyfills/Element/combo.js', {
     matches:1,
     closest:1,
     prepend:1,
@@ -160,7 +160,7 @@ function addFsStruct(obj, realObj, rootUrl){
         }
     }
 }
-addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.8/polyfills/');
+addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.9/polyfills/');
 
 
 var url, props, prop, obj, objects, i;

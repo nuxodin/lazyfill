@@ -16,7 +16,7 @@ Let's assume that your browser does not support the function "String.prototype.a
 
 Add this script on the top of your page:
 ```html
-<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.8/mod.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.9/mod.min.js"></script>
 ```
 done!
 
