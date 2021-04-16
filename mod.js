@@ -1,15 +1,6 @@
 !function(window, document){ 'use strict';
 
 var urls = {
-    'polyfill.io/v3/polyfill.min.js?features=Intl':{
-        formatToParts: [Intl.DateTimeFormat.prototype],
-        DisplayNames: [Intl],
-        ListFormat: [Intl],
-        Locale: [Intl],
-        PluralRules: [Intl],
-        RelativeTimeFormat: [Intl],
-        getCanonicalLocales: [Intl],
-    },
     'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js':{
         'fetch':[window],
         //'Headers':[window],
@@ -36,27 +27,23 @@ var urls = {
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
         'customElements':[window],
     },
-    /*
-    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.9/polyfills/Element/combo.js':{
-        'matches':[Element.prototype],
-        'closest':[Element.prototype],
-        'prepend':[Element.prototype],
-        'append':[Element.prototype],
-        'before':[Element.prototype],
-        'after':[Element.prototype],
-        'replaceWidth':[Element.prototype],
-        'remove':[Element.prototype],
-        // to use in SVGElement:
-        'blur':[Element.prototype],
-        'focus':[Element.prototype],
-        'contains':[Element.prototype],
-        'classList':[Element.prototype],
-        'getElementsByClassName':[Element.prototype],
-        'children':[Element.prototype],
-    },
-    */
 };
-addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.9/polyfills/Element/combo.js', {
+
+addCombo('polyfill.io/v3/polyfill.min.js?features=Intl', {
+    DateTimeFormat:{
+        prototype:{
+            formatToParts:1
+        }
+    },
+    DisplayNames:1,
+    ListFormat:1,
+    Locale:1,
+    PluralRules:1,
+    RelativeTimeFormat:1,
+    getCanonicalLocales:1,
+}, Intl);
+
+addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.3.0/polyfills/Element/combo.js', {
     matches:1,
     closest:1,
     prepend:1,
@@ -160,29 +147,17 @@ function addFsStruct(obj, realObj, rootUrl){
         }
     }
 }
-addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.9/polyfills/');
+addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.3.0/polyfills/');
 
 
-var url, props, prop, obj, objects, i;
-for (url in urls) {
-    props = urls[url];
-    for (prop in props) {
-        objects = props[prop];
-        for (i=0; obj=objects[i++];) {
-            if (prop in obj) {
-                //console.log('not needed '+prop+' in '+url+'<br>')
-                continue;
-            }
-            //console.log('"'+prop+'" not supported, adding getter');
-            addGetter(obj, prop, url);
-        }
-    }
-}
+var url;
+console.log(urls)
+for (url in urls) addGetters(url, urls[url]);
+
 console.log('lazyfill: getters added');
 
-//addGetter(window, 'fetch', 'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/fetch.js');
-
 function addCombo(url, obj, target) {
+    var prop;
     if (!urls[url]) urls[url] = {};
     for (prop in obj) {
         if (obj[prop] === 1) {
@@ -193,36 +168,62 @@ function addCombo(url, obj, target) {
         }
     }
 }
-function addGetter(obj, prop, url) {
-    if (obj.hasOwnProperty(prop)) return;
-    /* other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire */
-    Object.defineProperty(obj, prop, {
-        configurable: true,
-        get: function() {
-            //try { throw new Error(); } catch (e) { console.log(e.stack) } // track where it has been added
-            delete obj[prop];
-            console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
-            loadScriptSync('https://'+url);
-            return this[prop];
-        },
-        set: function(v) {
-            delete obj[prop];
-            obj[prop] = v;
-        }
-    });
-};
 
+/* */
+// other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire
+
+function addGetters(url, props) {
+    var prop, i, targets, target, propsNeeded = {};
+    for (prop in props) {
+        targets = props[prop];
+        for (i=0; target=targets[i++] ;) {
+            if (prop in target) continue; // not needed
+            if (!propsNeeded[prop]) propsNeeded[prop] = [];
+            propsNeeded[prop].push(target);
+            //console.log('"'+prop+'" not supported, adding getter');
+            addGetter(target, prop, url);
+        }
+    }
+    function addGetter(obj, prop, url) {
+        Object.defineProperty(obj, prop, {
+            configurable: true,
+            get: function() {
+                // try { throw new Error(); } catch (e) { console.log(e.stack) } // track where it has been added
+                //delete obj[prop];
+                deleteGetters(); // we have to delete all assigned getters for a url, otherwise the script is parsed anew with every polyfill!
+                console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
+                loadScriptSync('https://'+url);
+                //if (this[prop] === undefined) console.error('lazyfill: the polyfill should have added the property "'+prop+'"');
+                return this[prop];
+            },
+            set: function(v) {
+                //deleteGetters();
+                delete obj[prop]; // needed? the getter has already deleted the property!??
+                obj[prop] = v;
+            }
+        });
+    }
+    function deleteGetters() {
+        var prop, targets, target;
+        for (prop in propsNeeded) {
+            targets = props[prop];
+            for (i=0; target=targets[i++];) {
+                delete target[prop];
+            }
+        }
+    }
+};
 function loadScriptSync(path) {
-    var request = new XMLHttpRequest();
-    request.open('GET', path, false);
-    request.send(null);
-    if (request.status === 200) {
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', path, false);
+    xhr.send(null);
+    if (xhr.status === 200) {
         var elem = document.createElement('script');
-        elem.text = request.responseText;
+        elem.text = xhr.responseText;
         document.documentElement.firstChild.appendChild(elem);
         elem.setAttribute('data-src',path);
     } else {
-        console.warn('failed to load '+path)
+        console.warn('lazyfill: failed to load '+path)
     }
 }
 
