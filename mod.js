@@ -10,7 +10,7 @@ var urls = {
         RelativeTimeFormat: [Intl],
         getCanonicalLocales: [Intl],
     },
-    'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/fetch.js':{
+    'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js':{
         'fetch':[window],
         //'Headers':[window],
         //'Request':[window],
@@ -172,6 +172,9 @@ function addGetter(obj, prop, url) {
     Object.defineProperty(obj, prop, {
         configurable: true,
         get: function() {
+
+            //try { throw new Error(); } catch (e) { console.log(e.stack) }
+
             delete obj[prop];
             console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
             loadScriptSync('https://'+url);
