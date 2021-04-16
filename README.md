@@ -5,7 +5,7 @@ Polyfill Service - the lazy way
 Polyfills are only loaded when they are needed.  
 Initial 2Kb to polyfill a lot of Stuff.  
 
-Let's assume that your browser does not support the function "Element.prototype.toggleAttribute".
+Let's assume that your browser does not support the function "String.prototype.at".
 ```js
 > ['a','b','c'].at(-1); // accessing  [].at immediatel loads the polyfill
 > 'c'
