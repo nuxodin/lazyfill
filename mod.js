@@ -36,7 +36,7 @@ var urls = {
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
         'customElements':[window],
     },
-    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.5/polyfills/Element/combo.js':{
+    'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.7/polyfills/Element/combo.js':{
         'matches':[Element.prototype],
         'closest':[Element.prototype],
         'prepend':[Element.prototype],
@@ -144,7 +144,7 @@ function createUrls(obj, realObj, rootUrl){
     }
 }
 
-createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.5/polyfills/');
+createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.7/polyfills/');
 
 
 var url, props, prop, obj, objects, i;
