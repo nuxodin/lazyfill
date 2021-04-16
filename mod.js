@@ -143,7 +143,7 @@ function createUrls(obj, realObj, rootUrl){
         }
     }
 }
-console.log(urls)
+
 createUrls(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.2.5/polyfills/');
 
 
@@ -162,7 +162,7 @@ for (url in urls) {
         }
     }
 }
-console.log('lazyfill: everything is polyfilled');
+console.log('lazyfill: getters added');
 
 //addGetter(window, 'fetch', 'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/fetch.js');
 
