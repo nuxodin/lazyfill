@@ -38,3 +38,5 @@ https://polyfill.io/v3/
 https://ungap.github.io/
 
 https://github.com/Sylvain59650/all-polyfills
+
+https://vanillajstoolkit.com/polyfills/

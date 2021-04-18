@@ -60,6 +60,8 @@ addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.3.1/polyfills/Element/combo.js'
     children:1,
 }, Element.prototype);
 
+/* blank object "CSS" needed */
+if (!window.CSS) CSS = {};
 var lazyfills = {
     Array:{
         from:1,
@@ -78,6 +80,10 @@ var lazyfills = {
             values:1,
         }
     },
+    CSS:{
+        escape:1,
+        supports:1,
+    }
     document:{
         currentScript:1,
         caretRangeFromPoint:1,
@@ -105,7 +111,10 @@ var lazyfills = {
     },
     Object:{
         assign:1,
+        entries:1,
+        fromEntries:1,
         is:1,
+        keys:1,
         values:1,
     },
     Promise:{
