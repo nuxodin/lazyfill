@@ -114,7 +114,7 @@ var lazyfills = {
         entries:1,
         fromEntries:1,
         is:1,
-        keys:1,
+        //keys:1,
         values:1,
     },
     Promise:{
