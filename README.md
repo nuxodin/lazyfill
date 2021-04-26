@@ -22,7 +22,7 @@ done!
 
 # How it works
 
-To every polyfillable property, the scripts adds a getter which synchronously loads the corresponding polyfill.
+To every polyfillable property, the scripts adds a getter which synchronously loads the corresponding polyfill.  
 Of course, we all know that blocking xhr-requests is not nice.  
 Therefore, the url to the script that should be added to the page is given in the console.
 
