@@ -7,7 +7,7 @@ Initial 2Kb to polyfill a lot of Stuff.
 
 Let's assume that your browser does not support the function "String.prototype.at".
 ```js
-> ['a','b','c'].at(-1); // accessing  [].at immediatel loads the polyfill
+> ['a','b','c'].at(-1); // accessing  [].at immediately loads the polyfill
 > 'c'
 ```
 
