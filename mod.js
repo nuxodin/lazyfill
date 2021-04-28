@@ -83,7 +83,7 @@ var lazyfills = {
     CSS:{
         escape:1,
         supports:1,
-    }
+    },
     document:{
         currentScript:1,
         caretRangeFromPoint:1,
