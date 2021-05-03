@@ -73,6 +73,8 @@ var lazyfills = {
             fill:1,
             find:1,
             findIndex:1,
+            findLast:1,
+            findLastIndex:1,
             flat:1,
             flatMap:1,
             includes:1,
