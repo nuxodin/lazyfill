@@ -43,7 +43,7 @@ addCombo('polyfill.io/v3/polyfill.min.js?features=Intl', {
     getCanonicalLocales:1,
 }, Intl);
 
-addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.5.0/polyfills/Element/combo.js', {
+addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.6.0/polyfills/Element/combo.js', {
     matches:1,
     closest:1,
     prepend:1,
@@ -166,7 +166,7 @@ function addFsStruct(obj, realObj, rootUrl){
         }
     }
 }
-addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.5.0/polyfills/');
+addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.6.0/polyfills/');
 
 
 var url;
