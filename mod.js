@@ -54,14 +54,14 @@ addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.5.0/polyfills/Element/combo.js'
     remove:1,
     blur:1, // to use in SVGElement:
     focus:1,
-    contains:1,
+//    contains:1, // moved to Node.prototype
     classList:1,
     getElementsByClassName:1,
     children:1,
 }, Element.prototype);
 
 /* blank object "CSS" needed */
-if (!window.CSS) CSS = {};
+if (!window.CSS) window.CSS = {};
 var lazyfills = {
     Array:{
         from:1,
@@ -90,8 +90,16 @@ var lazyfills = {
         currentScript:1,
         caretRangeFromPoint:1,
     },
+    Node:{
+        prototype:{
+            contains:1,
+            isConnected:1,
+        },
+    },
     Element:{
-        toggleAttribute:1
+        prototype:{
+            toggleAttribute:1
+        }
     },
     HTMLFormElement:{
         prototype:{
@@ -236,6 +244,30 @@ function loadScriptSync(path) {
         console.warn('lazyfill: failed to load '+path)
     }
 }
+
+
+/*
+if (!('contains' in Node.prototype)) {
+    Node.prototype.contains = function(el){
+        if (el instanceof CharacterData) {
+            if (!el.parentNode) return false;
+            el = el.parentNode;
+        }
+        if (this === el) return true;
+        if (this instanceof Document) {
+            return this.documentElement.contains(el)
+        }
+        return HTMLElement.prototype.contains.call(this, el);
+    }
+}
+if (!('isConnected' in Node.prototype)) {
+    Object.defineProperty(Node.prototype, 'isConnected',{
+        get:function(){
+            return this.ownerDocument.contains(this);
+        }
+    })
+}
+*/
 
 /* very small polyfills, they are not worth adding to the service */
 if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11

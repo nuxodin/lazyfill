@@ -56,7 +56,7 @@ function mutationMacro(nodes) {
 var props = [
     'blur', // ie11
     'focus',
-    'contains',
+//    'contains', // needed at Node.prototype
     'classList',
     'getElementsByClassName',
     // 'className',
