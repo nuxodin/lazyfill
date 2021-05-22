@@ -152,6 +152,9 @@ var lazyfills = {
     requestIdleCallback:1,
     cancelIdleCallback:1,
     WeakSet:1,
+    crypto:{
+        randomUUID:1,
+    },
 };
 function addFsStruct(obj, realObj, rootUrl){
     var prop;
