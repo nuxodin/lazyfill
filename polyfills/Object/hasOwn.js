@@ -1,0 +1,1 @@
+!Object.hasOwn && (Object.hasOwn = Object.call.bind(Object.hasOwnProperty));
