@@ -1,4 +1,5 @@
 // https://raw.githubusercontent.com/behnammodi/polyfill/master/array.polyfill.js
+
 if (!Array.prototype.findLastIndex) {
     Object.defineProperty(Array.prototype, 'findLastIndex', {
         value: function (predicate, thisArg) {
