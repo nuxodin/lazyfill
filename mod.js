@@ -94,6 +94,7 @@ var lazyfills = {
         prototype:{
             contains:1,
             isConnected:1,
+            //inserAfter:1, draft
         },
     },
     Element:{
