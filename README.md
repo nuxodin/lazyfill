@@ -1,4 +1,4 @@
-# 💊 lazyfill (beta)
+# 💊 lazyfill
 
 Polyfill Service - the lazy way
 
