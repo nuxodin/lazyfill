@@ -60,6 +60,42 @@ addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.8.0/polyfills/Element/combo.js'
     children:1,
 }, Element.prototype);
 
+/*
+var getPrototypeOf = Object.getPrototypeOf;
+var AsyncIteratorPrototype = getPrototypeOf(getPrototypeOf(getPrototypeOf((async function* () {})()[Symbol.asyncIterator]())));
+var IteratorPrototype = getPrototypeOf(getPrototypeOf([][Symbol.iterator]()));
+var props = {
+    map:1,
+    chain:1,
+    count:1,
+    cycle:1,
+    drop:1,
+    dropWhile:1,
+    every:1,
+    filter:1,
+    find:1,
+    findIndex:1,
+    flatMap:1,
+    forEach:1,
+    fuse:1,
+    join:1,
+    map:1,
+    max:1,
+    min:1,
+    partition:1,
+    reduce:1,
+    some:1,
+    take:1,
+    takeWhile:1,
+    toArray:1,
+    zip:1,
+}
+console.log(IteratorPrototype)
+addCombo('cdn.jsdelivr.net/npm/iterator-polyfill@1.0.9/dist/index.min.js', props, IteratorPrototype);
+addCombo('cdn.jsdelivr.net/npm/iterator-polyfill@1.0.9/dist/index.min.js', props, AsyncIteratorPrototype);
+*/
+
+
 /* blank object "CSS" needed */
 if (!window.CSS) window.CSS = {};
 var lazyfills = {
@@ -175,6 +211,31 @@ addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.8.0/polyf
 
 var url;
 for (url in urls) addGetters(url, urls[url]);
+
+
+/* To list polyfills in the readme: *
+//IteratorPrototype.name = 'Iterator';
+//AsyncIteratorPrototype.name = 'AsyncIterator';
+CSS.name = 'CSS';
+let supports = {};
+Object.values(urls).forEach(function(props){
+    Object.entries(props).forEach(([prop, objects])=>{
+        objects.forEach(obj=>{
+            let name = obj[Symbol.toStringTag] || obj.name || obj.constructor.name
+            if (!supports[name]) supports[name] = [];
+            supports[name].push(prop)
+        })
+    })
+});
+let output = '<ul>';
+Object.entries(supports).map(([obj, props])=>{
+    output += '<li>'+obj
+    output += '<ul>'+props.map(prop => `<li>${prop}\n`).join('')+'</ul>';
+})
+output += '</ul>'
+console.log(output)
+/* */
+
 
 console.log('lazyfill: getters added');
 
