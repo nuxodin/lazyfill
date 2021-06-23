@@ -4,7 +4,36 @@
 
 !function () {
 
-    const randomFillSync = window.crypto.getRandomValues.bind(window.crypto);
+    //
+    // internal/errors
+    //
+    class ERR_INVALID_ARG_TYPE extends TypeError {
+        constructor(name, type, value) {
+            super(`${name} variable is not of type ${type} (value: '${value}')`);
+        }
+        code = 'ERR_INVALID_ARG_TYPE';
+    }
+
+    //
+    // internal/validators
+    //
+    function validateBoolean(value, name) {
+        if (typeof value !== 'boolean') throw new ERR_INVALID_ARG_TYPE(name, 'boolean', value);
+    }
+
+    function validateObject(value, name) {
+        if (value === null || Array.isArray(value) || typeof value !== 'object') {
+            throw new ERR_INVALID_ARG_TYPE(name, 'Object', value);
+        }
+    }
+
+    //
+    // crypto
+    //
+    const randomFillSync =
+        typeof window === 'undefined'
+            ? require('crypto').randomFillSync
+            : window.crypto.getRandomValues.bind(window.crypto);
 
     // Implements an RFC 4122 version 4 random UUID.
     // To improve performance, random data is generated in batches
@@ -18,17 +47,21 @@
     let uuidNotBuffered;
     let uuid;
     let uuidBatch = 0;
-    let slice = Uint8Array.prototype.slice || Array.prototype.slice;
 
     function getBufferedUUID() {
-        if (uuidData === undefined) uuidData = new Uint8Array(16 * kBatchSize);
+        if (uuidData === undefined) {
+            uuidData = new Uint8Array(16 * kBatchSize);
+        }
         if (uuidBatch === 0) randomFillSync(uuidData);
         uuidBatch = (uuidBatch + 1) % kBatchSize;
-        return slice.call(uuidData, uuidBatch * 16, uuidBatch * 16 + 16);
+        return uuidData.slice(uuidBatch * 16, uuidBatch * 16 + 16);
     }
 
     function randomUUID(options) {
-        const disableEntropyCache = options ? options.disableEntropyCache : false;
+        if (options !== undefined) validateObject(options, 'options');
+        const { disableEntropyCache = false } = { ...options };
+
+        validateBoolean(disableEntropyCache, 'options.disableEntropyCache');
 
         if (uuid === undefined) {
             uuid = new Uint8Array(36);

@@ -1,5 +1,10 @@
 !function(window, document){ 'use strict';
 
+/* very small polyfills, they are not worth adding to the service */
+if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
+if (!document.scrollingElement) document.scrollingElement = document.documentElement; // ie11
+if (!window.crypto) window.crypto = window.msCrypto; // ie11
+
 var urls = {
     'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js':{
         'fetch':[window],
@@ -43,7 +48,7 @@ addCombo('polyfill.io/v3/polyfill.min.js?features=Intl', {
     getCanonicalLocales:1,
 }, Intl);
 
-addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.8.0/polyfills/Element/combo.js', {
+addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.1.0/polyfills/Element/combo.js', {
     matches:1,
     closest:1,
     prepend:1,
@@ -168,6 +173,11 @@ var lazyfills = {
         allSettled:1,
         any:1
     },
+    RegExp:{
+        prototype:{
+            flags:1,
+        }
+    },
     String:{
         fromCodePoint:1,
         prototype:{
@@ -178,7 +188,8 @@ var lazyfills = {
             padEnd:1,
             padStart:1,
             repeat:1,
-            startsWith:1
+            startsWith:1,
+            replaceAll:1,
         }
     },
     SVGStyleElement:{
@@ -198,6 +209,7 @@ function addFsStruct(obj, realObj, rootUrl){
     for (prop in obj) {
         if (obj[prop] === 1) {
             var url = rootUrl + prop + '.min.js'
+var url = rootUrl + prop + '.js'
             if (!urls[url]) urls[url] = {};
             if (!urls[url][prop]) urls[url][prop] = [];
             urls[url][prop].push(realObj);
@@ -206,14 +218,15 @@ function addFsStruct(obj, realObj, rootUrl){
         }
     }
 }
-addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.8.0/polyfills/');
+//addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.1.0/polyfills/');
+addFsStruct(lazyfills, window, 'localhost/github/lazyfill/polyfills/');
 
 
 var url;
 for (url in urls) addGetters(url, urls[url]);
 
 
-/* To list polyfills in the readme: *
+/* To list polyfills in the readme: */
 //IteratorPrototype.name = 'Iterator';
 //AsyncIteratorPrototype.name = 'AsyncIterator';
 CSS.name = 'CSS';
@@ -275,7 +288,11 @@ function addGetters(url, props) {
                 //delete obj[prop];
                 deleteGetters(); // we have to delete all assigned getters for a url, otherwise the script is parsed anew with every polyfill!
                 console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
-                loadScriptSync('https://'+url);
+if (url[0] === 'l') {
+    loadScriptSync('http://'+url);
+} else {
+    loadScriptSync('https://'+url);
+}
                 //if (this[prop] === undefined) console.error('lazyfill: the polyfill should have added the property "'+prop+'"');
                 return this[prop];
             },
@@ -334,9 +351,6 @@ if (!('isConnected' in Node.prototype)) {
 }
 */
 
-/* very small polyfills, they are not worth adding to the service */
-if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
-if (!document.scrollingElement) document.scrollingElement = document.documentElement; // ie11
 
 /* more *
 // iterators, available on ch/ff, not useable for ie11

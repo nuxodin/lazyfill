@@ -17,7 +17,7 @@ var body = document.body;
 body.innerHTML += 'no polyfill loaded so far.<br>';
 
 setTimeout(function(){
-  body.innerHTML += "executing ['x','y','z'].item(-1) loads the polyfill<br>";
+  body.innerHTML += "executing ['x','y','z'].at(-1) loads the polyfill<br>";
 
   var item = ['x','y','z'].at(-1);
 
@@ -67,7 +67,8 @@ console.log(div.isConnected);
 document.body.append(div)
 console.log(div.isConnected);
 
-
+console.log('abacad'.replaceAll(/(a)/g, 'x$x'));
+console.log('abacad'.replaceAll('a','x'));
 
 console.log(crypto.randomUUID());
 

@@ -17,7 +17,7 @@ Let's assume that your browser does not support the function "String.prototype.a
 
 Add this script on the top of your page:
 ```html
-<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@0.8.0/mod.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.1.0/mod.min.js"></script>
 ```
 done!
 
@@ -91,6 +91,7 @@ done!
 <li>hasOwn
 </ul><li>Promise<ul><li>allSettled
 <li>any
+</ul><li>RegExp<ul><li>flags
 </ul><li>String<ul><li>fromCodePoint
 <li>at
 <li>codePointAt
@@ -100,6 +101,7 @@ done!
 <li>padStart
 <li>repeat
 <li>startsWith
+<li>replaceAll
 </ul><li>SVGStyleElement<ul><li>sheet
 </ul><li>Crypto<ul><li>randomUUID
 </ul></ul>

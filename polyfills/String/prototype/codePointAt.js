@@ -1,6 +1,8 @@
 if (!String.prototype.codePointAt) {
-    (function () {
-        var codePointAt = function (position) {
+    Object.defineProperty(String.prototype, 'codePointAt', {
+        configurable: true,
+        writable: true,
+        value: function codePointAt (position) {
             if (this == null) {
                 throw TypeError();
             }
@@ -22,15 +24,6 @@ if (!String.prototype.codePointAt) {
                 }
             }
             return first;
-        };
-        if (Object.defineProperty) {
-            Object.defineProperty(String.prototype, 'codePointAt', {
-                value: codePointAt,
-                configurable: true,
-                writable: true,
-            });
-        } else {
-            String.prototype.codePointAt = codePointAt;
-        }
-    })();
+        },
+    });
 }
