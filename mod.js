@@ -218,15 +218,15 @@ var url = rootUrl + prop + '.js'
         }
     }
 }
-//addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.1.0/polyfills/');
-addFsStruct(lazyfills, window, 'localhost/github/lazyfill/polyfills/');
+addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.1.0/polyfills/');
+//addFsStruct(lazyfills, window, 'localhost/github/lazyfill/polyfills/');
 
 
 var url;
 for (url in urls) addGetters(url, urls[url]);
 
 
-/* To list polyfills in the readme: */
+/* To list polyfills in the readme: *
 //IteratorPrototype.name = 'Iterator';
 //AsyncIteratorPrototype.name = 'AsyncIterator';
 CSS.name = 'CSS';
@@ -288,11 +288,7 @@ function addGetters(url, props) {
                 //delete obj[prop];
                 deleteGetters(); // we have to delete all assigned getters for a url, otherwise the script is parsed anew with every polyfill!
                 console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
-if (url[0] === 'l') {
-    loadScriptSync('http://'+url);
-} else {
-    loadScriptSync('https://'+url);
-}
+                loadScriptSync('https://'+url);
                 //if (this[prop] === undefined) console.error('lazyfill: the polyfill should have added the property "'+prop+'"');
                 return this[prop];
             },
