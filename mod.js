@@ -59,7 +59,6 @@ addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.1.0/polyfills/Element/combo.js'
     remove:1,
     blur:1, // to use in SVGElement:
     focus:1,
-//    contains:1, // moved to Node.prototype
     classList:1,
     getElementsByClassName:1,
     children:1,
@@ -209,7 +208,6 @@ function addFsStruct(obj, realObj, rootUrl){
     for (prop in obj) {
         if (obj[prop] === 1) {
             var url = rootUrl + prop + '.min.js'
-var url = rootUrl + prop + '.js'
             if (!urls[url]) urls[url] = {};
             if (!urls[url][prop]) urls[url][prop] = [];
             urls[url][prop].push(realObj);

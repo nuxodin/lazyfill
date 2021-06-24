@@ -21,7 +21,6 @@ var poly = {
 		var parentNode = this.parentNode;
 		parentNode && parentNode.insertBefore(mutationMacro(arguments) , this.nextSibling);
 	},
-	//replace: function replace() { // zzz
 	replaceWidth: function replace() {
 		var parentNode = this.parentNode;
 		parentNode && parentNode.replaceChild(mutationMacro(arguments), this);
@@ -56,7 +55,6 @@ function mutationMacro(nodes) {
 var props = [
     'blur', // ie11
     'focus',
-//    'contains', // needed at Node.prototype
     'classList',
     'getElementsByClassName',
     // 'className',
