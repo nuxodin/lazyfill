@@ -29,6 +29,12 @@ var urls = {
         //'URL':[window], // ie11: this will not work as it has "URL" but not as a constructor, what should we do?
         'URLSearchParams':[window]
     },
+    /* not ready yet, exposes window.temportal.Temporal *
+    'cdn.jsdelivr.net/npm/@js-temporal/polyfill@0.0.0/dist/index.umd.min.js':{
+        Temporal:[window],
+        temporal:[window],
+    },
+    /**/
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
         'customElements':[window],
     },
