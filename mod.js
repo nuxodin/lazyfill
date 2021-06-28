@@ -5,6 +5,7 @@ if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.fo
 if (!document.scrollingElement) document.scrollingElement = document.documentElement; // ie11
 if (!window.crypto) window.crypto = window.msCrypto; // ie11
 
+
 var urls = {
     'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js':{
         'fetch':[window],
@@ -313,6 +314,8 @@ function addGetters(url, props) {
         }
     }
 };
+
+
 function loadScriptSync(path) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', path, false);
@@ -328,30 +331,6 @@ function loadScriptSync(path) {
 }
 
 
-/*
-if (!('contains' in Node.prototype)) {
-    Node.prototype.contains = function(el){
-        if (el instanceof CharacterData) {
-            if (!el.parentNode) return false;
-            el = el.parentNode;
-        }
-        if (this === el) return true;
-        if (this instanceof Document) {
-            return this.documentElement.contains(el)
-        }
-        return HTMLElement.prototype.contains.call(this, el);
-    }
-}
-if (!('isConnected' in Node.prototype)) {
-    Object.defineProperty(Node.prototype, 'isConnected',{
-        get:function(){
-            return this.ownerDocument.contains(this);
-        }
-    })
-}
-*/
-
-
 /* more *
 // iterators, available on ch/ff, not useable for ie11
 if (window.Symbol && Symbol.iterator) {
@@ -359,7 +338,6 @@ if (window.Symbol && Symbol.iterator) {
 		if (!Interface) return;
 		var proto = Interface.prototype;
 		if (proto[Symbol.iterator]) return;
-        console.log('not needed on '+Interface)
 		proto[Symbol.iterator] = Array.prototype[Symbol.iterator];
 	});
 }
