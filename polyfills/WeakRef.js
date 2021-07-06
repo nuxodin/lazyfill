@@ -23,7 +23,7 @@ if (!window.WeakRef) {
     window.WeakRef = function(value) {
         this.id = Math.random();
         let collection = el.getElementsByTagName("x"+this.id);
-        collection.expando = obj;
+        collection.expando = value;
         collection = null;
     }
     WeakRef.prototype = {
