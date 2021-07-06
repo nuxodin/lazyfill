@@ -16,7 +16,7 @@ Todo: any other solutions / hacks?
 
 */
 
-console.log(' dont use this ');
+console.log('dont use this!');
 
 if (!window.WeakRef) {
     let el = document.createElement('div');
