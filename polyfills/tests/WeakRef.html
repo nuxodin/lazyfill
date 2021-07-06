@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width">
+        <title>WeakRef test</title>
+<body>
+
+<script>
+addEventListener('error', function(e){ log(e.message); })
+
+delete window.WeakRef;
+</script>
+<script src="../WeakRef.js"></script>
+
+<div id=multipleEl></div>
+
+<script>
+
+let obj = { foo: 'bar' };
+const wr = new WeakRef(obj);
+
+
+log('before: ' + JSON.stringify(wr.deref()) );
+
+obj = null;
+
+let interval = setInterval(function(){
+    let val = wr.deref();
+    log('after a second: ' + JSON.stringify(val));
+    if (val === undefined) clearInterval(interval);
+}, 1000);
+
+
+
+
+// performance test
+
+var multiple = [];
+let items = 5000;
+for (let i = 0; i < items; ++i) {
+    let span = document.createElement('span')
+    multipleEl.appendChild(span);
+    multiple.push(
+        new WeakRef(span)
+    )
+}
+multipleEl.innerHTML = '';
+
+let multipleInter = setInterval(function(){
+    let has = false;
+    multiple.forEach(function(item){
+        if (item.deref() !== undefined) has = true;
+    })
+    log(items+' weakrefs test collected? ' + (has?'no':'yes!') );
+    if (!has) clearInterval(multipleInter)
+}, 1000);
+
+
+function log(text) {
+    console.log(text)
+    let div = document.createElement('div');
+    div.innerHTML = text;
+    document.body.appendChild(div);
+}
+
+</script>
