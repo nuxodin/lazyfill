@@ -23,7 +23,7 @@ const wr = new WeakRef(obj);
 
 log('before: ' + JSON.stringify(wr.deref()) );
 
-obj = null;
+obj = null; // trigger gc
 
 let interval = setInterval(function(){
     let val = wr.deref();
