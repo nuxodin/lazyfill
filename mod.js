@@ -1,4 +1,5 @@
 !function(window, document){ 'use strict';
+// other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire
 
 /* very small polyfills, they are not worth adding to the service */
 if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
@@ -9,9 +10,7 @@ if (!window.crypto) window.crypto = window.msCrypto; // ie11
 var urls = {
     'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js':{
         'fetch':[window],
-        //'Headers':[window],
-        //'Request':[window],
-        //'Response':[window],
+        //'Headers':[window], 'Request':[window], 'Response':[window],
     },
     'cdn.jsdelivr.net/npm/promise-polyfill@8/dist/polyfill.min.js':{
         'Promise':[window]
@@ -215,6 +214,7 @@ function addFsStruct(obj, realObj, rootUrl){
     for (prop in obj) {
         if (obj[prop] === 1) {
             var url = rootUrl + prop + '.min.js'
+//var url = rootUrl + prop + '.js'
             if (!urls[url]) urls[url] = {};
             if (!urls[url][prop]) urls[url][prop] = [];
             urls[url][prop].push(realObj);
@@ -227,8 +227,7 @@ addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.1.0/polyf
 //addFsStruct(lazyfills, window, 'localhost/github/lazyfill/polyfills/');
 
 
-var url;
-for (url in urls) addGetters(url, urls[url]);
+for (let url in urls) addGetters(url, urls[url]);
 
 
 /* To list polyfills in the readme: *
@@ -254,7 +253,6 @@ output += '</ul>'
 console.log(output)
 /* */
 
-
 console.log('lazyfill: getters added');
 
 function addCombo(url, obj, target) {
@@ -269,9 +267,6 @@ function addCombo(url, obj, target) {
         }
     }
 }
-
-/* */
-// other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire
 
 function addGetters(url, props) {
     var prop, i, targets, target, propsNeeded = {};
@@ -316,6 +311,22 @@ function addGetters(url, props) {
 };
 
 
+/* Monkey Patches */
+var monkeyPatches = {
+    focusOptions:1
+};
+document.createElement('i').focus({
+    get preventScroll() {
+        delete monkeyPatches.focusOptions;
+    },
+});
+for (let patch in monkeyPatches) {
+    loadScriptAsync('http://localhost/github/lazyfill/monkeyPatches/'+patch+'.js', true);
+}
+/**/
+
+
+
 function loadScriptSync(path) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', path, false);
@@ -326,8 +337,13 @@ function loadScriptSync(path) {
         document.documentElement.firstChild.appendChild(elem);
         elem.setAttribute('data-src',path);
     } else {
-        console.warn('lazyfill: failed to load '+path)
+        console.warn('lazyfill: load failed '+path)
     }
+}
+function loadScriptAsync(path) {
+    var elem = document.createElement('script');
+    elem.setAttribute('src',path);
+    document.documentElement.firstChild.appendChild(elem);
 }
 
 
