@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 /* /onElement */
 
-//var rootSrc = 'https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.4.0/polyfills/html/';
+//var rootSrc = 'https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.5.0/polyfills/html/';
 
 var polyfills = {
     dialog: {
