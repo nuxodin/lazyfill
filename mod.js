@@ -4,7 +4,7 @@
 var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.3.0/';
 var ending = '.min.js';
 
-//var root = 'localhost/github/lazyfill/'; var ending = '.js';
+var root = 'localhost/github/lazyfill/'; var ending = '.js';
 
 /* very small polyfills, they are not worth adding to the service */
 if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
@@ -59,7 +59,7 @@ addCombo('polyfill.io/v3/polyfill.min.js?features=Intl', {
     getCanonicalLocales:1,
 }, Intl);
 
-addCombo(root+'Element/combo'+ending, {
+addCombo(root+'polyfills/Element/combo'+ending, {
     matches:1,
     closest:1,
     prepend:1,
