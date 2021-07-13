@@ -341,10 +341,10 @@ if (!cl.contains('test')) delete monkeyPatches.forceToggle
 for (let patch in monkeyPatches) {
     loadScriptAsync('https://'+root + 'monkeyPatches/' + patch + ending, true);
 }
-/**/
 
 
 
+/* helpers */
 function loadScriptSync(path) {
     var xhr = new XMLHttpRequest();
     xhr.open('GET', path, false);
