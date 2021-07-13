@@ -8,6 +8,32 @@
 </head>
 <body>
 
+<h1 id=elContainsTextCheck>Element contains text-nodes</h1>
+<script>
+setTimeout(function(){
+  var el = elContainsTextCheck;
+  if (el.contains(el.firstChild)) {
+    elContainsTextCheck.style.color = 'green';
+  } else {
+    elContainsTextCheck.style.color = 'red';
+  }
+},100)
+</script>
+
+
+<h1 id=forceToggleCheck>ClassList force toggle</h1>
+<script>
+  setTimeout(function(){
+    var docEl = document.documentElement;
+    docEl.classList.toggle('test', false);
+    if (docEl.classList.contains('test')) {
+      forceToggleCheck.style.color = 'red';
+    } else {
+      forceToggleCheck.style.color = 'green';
+    }
+  },100)
+</script>
+
 
 
 <h1>focus options preventScroll</h1>
