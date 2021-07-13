@@ -1,6 +1,11 @@
 !function(window, document){ 'use strict';
 // other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire
 
+var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.2.0/';
+var ending = '.min.js';
+
+//var root = 'localhost/github/lazyfill/'; var ending = '.js';
+
 /* very small polyfills, they are not worth adding to the service */
 if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
 if (!document.scrollingElement) document.scrollingElement = document.documentElement; // ie11
@@ -54,7 +59,7 @@ addCombo('polyfill.io/v3/polyfill.min.js?features=Intl', {
     getCanonicalLocales:1,
 }, Intl);
 
-addCombo('cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.2.0/polyfills/Element/combo.js', {
+addCombo(root+'Element/combo'+ending, {
     matches:1,
     closest:1,
     prepend:1,
@@ -213,8 +218,7 @@ function addFsStruct(obj, realObj, rootUrl){
     var prop;
     for (prop in obj) {
         if (obj[prop] === 1) {
-            var url = rootUrl + prop + '.min.js'
-//var url = rootUrl + prop + '.js'
+            var url = rootUrl + prop + ending
             if (!urls[url]) urls[url] = {};
             if (!urls[url][prop]) urls[url][prop] = [];
             urls[url][prop].push(realObj);
@@ -223,8 +227,7 @@ function addFsStruct(obj, realObj, rootUrl){
         }
     }
 }
-addFsStruct(lazyfills, window, 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.2.0/polyfills/');
-//addFsStruct(lazyfills, window, 'localhost/github/lazyfill/polyfills/');
+addFsStruct(lazyfills, window, root+'polyfills/');
 
 
 for (let url in urls) addGetters(url, urls[url]);
@@ -289,6 +292,7 @@ function addGetters(url, props) {
                 deleteGetters(); // we have to delete all assigned getters for a url, otherwise the script is parsed anew with every polyfill!
                 console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
                 loadScriptSync('https://'+url);
+//loadScriptSync('http://'+url);
                 //if (this[prop] === undefined) console.error('lazyfill: the polyfill should have added the property "'+prop+'"');
                 return this[prop];
             },
@@ -313,15 +317,29 @@ function addGetters(url, props) {
 
 /* Monkey Patches */
 var monkeyPatches = {
-    focusOptions:1
+    focusOptions:1,
+    elContainsText:1,
+    forceToggle:1,
 };
-document.createElement('i').focus({
+var dummyEl = document.createElement('i');
+// focus options
+dummyEl.focus({
     get preventScroll() {
         delete monkeyPatches.focusOptions;
     },
 });
+// IE11 contains-bug, textNodes are not containing
+dummyEl.innerHTML = ' ';
+if (dummyEl.contains(dummyEl.firstChild)) delete monkeyPatches.elContainsText;
+
+// classList.toggle force options
+var cl = dummyEl.classList;
+cl.toggle('test',false);
+if (!cl.contains('test')) delete monkeyPatches.forceToggle
+
+// load patches
 for (let patch in monkeyPatches) {
-    loadScriptAsync('http://localhost/github/lazyfill/monkeyPatches/'+patch+'.js', true);
+    loadScriptAsync('https://'+root + 'monkeyPatches/' + patch + ending, true);
 }
 /**/
 
@@ -342,7 +360,9 @@ function loadScriptSync(path) {
 }
 function loadScriptAsync(path) {
     var elem = document.createElement('script');
-    elem.setAttribute('src',path);
+    elem.async = false;
+    elem.src = path;
+    //elem.setAttribute('src',path);
     document.documentElement.firstChild.appendChild(elem);
 }
 
