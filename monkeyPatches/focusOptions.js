@@ -11,7 +11,7 @@
     if (!supported) {
         let original = HTMLElement.prototype.focus;
         Element.prototype.focus = HTMLElement.prototype.focus = function(options){
-            if (options.preventScroll) {
+            if (options && options.preventScroll) {
                 const map = new Map();
                 let p = this;
                 while (p = p.parentNode) map.set(p, [p.scrollLeft, p.scrollTop]);
