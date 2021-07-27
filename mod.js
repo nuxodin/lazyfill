@@ -43,6 +43,9 @@ var urls = {
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
         'customElements':[window],
     },
+    'cdn.jsdelivr.net/gh/nuxodin/structured-clone@2.4.0/index.js':{
+        'structuredClone':[window],
+    }
 };
 
 addCombo('polyfill.io/v3/polyfill.min.js?features=Intl', {
