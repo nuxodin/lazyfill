@@ -8,15 +8,17 @@
     <script src="../../mod.js"></script>
 
 
-<script>
+<script style="display:block">
 
-var O = {
+var object = {
     array: [1,2,3],
     date: new Date(),
     file: new File(["content"], "name"),
 }
-var copy = structuredClone(O);
-console.log(O);
+var copy = structuredClone(object);
+console.log(object);
 console.log(copy);
+console.log(object.date === copy.date)
+console.log(object.file === copy.file)
 
 </script>
