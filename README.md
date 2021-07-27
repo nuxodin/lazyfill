@@ -28,6 +28,7 @@ Add this script on the top of your page:
 <li>requestIdleCallback
 <li>cancelIdleCallback
 <li>WeakSet
+<li>structuredClone
 </ul><li>Intl.DateTimeFormat<ul><li>formatToParts
 </ul><li>Intl<ul><li>DisplayNames
 <li>ListFormat
