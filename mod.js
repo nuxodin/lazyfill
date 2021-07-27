@@ -4,7 +4,7 @@
 var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.5.2/';
 var ending = '.min.js';
 
-//var root = 'localhost/github/lazyfill/'; var ending = '.js';
+var root = 'localhost/github/lazyfill/'; var ending = '.js';
 
 /* very small polyfills, they are not worth adding to the service */
 if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
