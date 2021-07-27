@@ -4,6 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width">
         <title>WeakRef test</title>
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/u1ui/base.css/full.css">
 <body>
     <script src="../../mod.js"></script>
 
@@ -14,11 +15,13 @@ var object = {
     array: [1,2,3],
     date: new Date(),
     file: new File(["content"], "name"),
+    uint8Array: new Uint8Array(2),
 }
 var copy = structuredClone(object);
 console.log(object);
 console.log(copy);
 console.log(object.date === copy.date)
 console.log(object.file === copy.file)
+console.log(object.uint8Array === copy.uint8Array)
 
 </script>
