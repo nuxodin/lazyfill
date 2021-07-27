@@ -4,7 +4,7 @@
 var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.5.2/';
 var ending = '.min.js';
 
-var root = 'localhost/github/lazyfill/'; var ending = '.js';
+//var root = 'localhost/github/lazyfill/'; var ending = '.js';
 
 /* very small polyfills, they are not worth adding to the service */
 if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
@@ -43,7 +43,7 @@ var urls = {
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
         'customElements':[window],
     },
-    'cdn.jsdelivr.net/gh/nuxodin/structured-clone@2.4.0/index.js':{
+    'cdn.jsdelivr.net/gh/nuxodin/structured-clone@2.4.0/index.min.js':{
         'structuredClone':[window],
     }
 };
