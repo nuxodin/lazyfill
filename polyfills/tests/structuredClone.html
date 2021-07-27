@@ -8,5 +8,13 @@
 
 <script>
 
+var O = {
+    array: [1,2,3],
+    date: new Date(),
+    file: new File(["content"], "name"),
+}
+var copy = structuredClone(O);
+console.log(O);
+console.log(copy);
 
 </script>
