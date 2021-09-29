@@ -297,7 +297,10 @@ function addGetters(url, props) {
                 //delete obj[prop];
                 deleteGetters(); // we have to delete all assigned getters for a url, otherwise the script is parsed anew with every polyfill!
                 console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
+
                 window.exports = {};
+                window.module = true; // ??
+
                 loadScriptSync('https://'+url);
                 console.log(window.exports)
 //loadScriptSync('http://'+url);
