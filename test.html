@@ -49,12 +49,10 @@ console.log('abacad'.replaceAll('a','x'));
 console.log(crypto.randomUUID());
 
 
-
+console.log('URLPattern:');
 const pattern = new URLPattern('http{s}?://*.example.com/books/:id');
-
-// Absolute URL strings
-console.log(pattern.test('https://store.example.com/books/123')); // true
-console.log(pattern.test('https://example.com/books/123')); // false
+console.log(pattern.test('https://store.example.com/books/123') === true);
+console.log(pattern.test('https://example.com/books/123') === false);
 
 
 
