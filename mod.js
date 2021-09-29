@@ -300,7 +300,7 @@ function addGetters(url, props) {
 
                 // umd
                 window.exports = {};
-                window.module = true; // ??
+                window.module = true; // help! needed by umd but i dont know why?
 
                 loadScriptSync('https://'+url);
 
