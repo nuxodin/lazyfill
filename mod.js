@@ -300,13 +300,13 @@ function addGetters(url, props) {
 
                 // umd
                 window.exports = {};
-                window.module = true; // help! needed by umd but i dont know why?
+                window.module = true; // todo: needed by umd but i dont know why?
 
                 loadScriptSync('https://'+url);
-
-                if (!this[prop]) this[prop] = exports[prop]; // umd
-
 //loadScriptSync('http://'+url);
+
+                if (!this[prop]) this[prop] = exports[prop]; // todo: loop exports?
+
                 //if (this[prop] === undefined) console.error('lazyfill: the polyfill should have added the property "'+prop+'"');
                 return this[prop];
             },
