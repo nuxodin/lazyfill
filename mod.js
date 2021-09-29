@@ -298,11 +298,14 @@ function addGetters(url, props) {
                 deleteGetters(); // we have to delete all assigned getters for a url, otherwise the script is parsed anew with every polyfill!
                 console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
 
+                // umd
                 window.exports = {};
                 window.module = true; // ??
 
                 loadScriptSync('https://'+url);
-                console.log(window.exports)
+
+                if (!this[prop]) this[prop] = exports[prop]; // umd
+
 //loadScriptSync('http://'+url);
                 //if (this[prop] === undefined) console.error('lazyfill: the polyfill should have added the property "'+prop+'"');
                 return this[prop];
