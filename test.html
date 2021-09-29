@@ -50,10 +50,14 @@ console.log(crypto.randomUUID());
 
 
 
-let pattern = new URLPattern({
-    protocol: 'http{s}?',
-    hostname: ':subdomain.example.com',
-});
+const pattern = new URLPattern('http{s}?://*.example.com/books/:id');
+
+// Absolute URL strings
+console.log(pattern.test('https://store.example.com/books/123')); // true
+console.log(pattern.test('https://example.com/books/123')); // false
+
+
+
 
 </script>
 
