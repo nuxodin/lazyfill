@@ -19,6 +19,7 @@ Add this script on the top of your page:
 (Anything missing? Any suggestions?)
 
 <ul><li>Window<ul><li>fetch
+<li>URLPattern
 <li>Promise
 <li>IntersectionObserver
 <li>ResizeObserver
