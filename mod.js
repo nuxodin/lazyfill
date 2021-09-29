@@ -305,6 +305,7 @@ function addGetters(url, props) {
                 loadScriptSync('https://'+url);
 //loadScriptSync('http://'+url);
 
+console.log(exports)
                 if (!this[prop]) this[prop] = exports[prop]; // todo: loop exports?
 
                 //if (this[prop] === undefined) console.error('lazyfill: the polyfill should have added the property "'+prop+'"');
