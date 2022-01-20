@@ -13,6 +13,9 @@ if (!window.crypto) window.crypto = window.msCrypto; // ie11
 
 
 var urls = {
+    'cdn.jsdelivr.net/npm/cookie-store@3.0.0/index.min.js': {
+        'cookieStore': [window],
+    },
     'cdn.jsdelivr.net/npm/whatwg-fetch@3.6.2/dist/fetch.umd.min.js':{
         'fetch':[window],
         //'Headers':[window], 'Request':[window], 'Response':[window],

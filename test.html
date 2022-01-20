@@ -54,7 +54,8 @@ const pattern = new URLPattern('http{s}?://*.example.com/books/:id');
 console.log(pattern.test('https://store.example.com/books/123') === true);
 console.log(pattern.test('https://example.com/books/123') === false);
 
-
+cookieStore.set('test', 'xyz');
+cookieStore.get('test').then(console.log);
 
 </script>
 
