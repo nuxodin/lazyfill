@@ -211,6 +211,11 @@ var lazyfills = {
             replaceAll:1,
         }
     },
+    SubmitEvent:{
+        prototype:{
+            submitter:1
+        }
+    },
     SVGStyleElement:{
         prototype:{
             sheet:1
