@@ -10,7 +10,7 @@ Initial **2Kb** to polyfill a lot of Stuff.
 
 Add this script on the top of your page:
 ```html
-<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.5.5/mod.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.5.6/mod.min.js"></script>
 ```
 **done!**
 
