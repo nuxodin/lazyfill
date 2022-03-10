@@ -38,7 +38,7 @@ var urls = {
         'URLSearchParams':[window]
     },
     /* not ready yet, exposes window.temportal.Temporal */
-    'cdn.jsdelivr.net/npm/@js-temporal/polyfill@0.3.0/dist/index.umd.min.js':{
+    'cdn.jsdelivr.net/npm/@js-temporal/polyfill@0.4.0/dist/index.umd.min.js':{
         Temporal:[window],
         temporal:[window],
     },
