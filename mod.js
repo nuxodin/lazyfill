@@ -49,7 +49,7 @@ var urls = {
     'cdn.jsdelivr.net/gh/nuxodin/structured-clone@2.4.0/index.min.js':{
         'structuredClone':[window],
     },
-    'cdn.jsdelivr.net/npm/urlpattern-polyfill@1.0.0-rc1/dist/index.umd.js':{
+    'cdn.jsdelivr.net/npm/urlpattern-polyfill@1.0.0-rc5/dist/index.umd.js':{
         'URLPattern':[window],
     }
 };
