@@ -52,6 +52,9 @@ var urls = {
     'cdn.jsdelivr.net/npm/urlpattern-polyfill@1.0.0-rc5/dist/index.umd.js':{
         'URLPattern':[window],
     }
+    'unpkg.com/web-streams-polyfill/dist/polyfill.min.js':{
+	'ReadableStream':[window],
+    }
 };
 
 addCombo('polyfill.io/v3/polyfill.min.js?features=Intl', {
