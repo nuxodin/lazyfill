@@ -35,6 +35,7 @@ Add this script on the top of your page:
          <li>customElements
          <li>requestIdleCallback
          <li>structuredClone
+         <li>ReadableStream
       </ul>
    <li>
       Intl.DateTimeFormat
