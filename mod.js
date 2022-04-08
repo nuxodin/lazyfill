@@ -52,7 +52,7 @@ var urls = {
     'cdn.jsdelivr.net/npm/urlpattern-polyfill@1.0.0-rc5/dist/index.umd.js':{
         'URLPattern':[window],
     },
-    'unpkg.com/web-streams-polyfill/dist/polyfill.min.js':{
+    'unpkg.com/web-streams-polyfill@3.2.1/dist/polyfill.min.js':{
 	'ReadableStream':[window],
     },
 };
