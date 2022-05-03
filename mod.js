@@ -165,6 +165,11 @@ var lazyfills = {
             toggleAttribute:1
         }
     },
+    HTMLElement:{
+        prototype:{
+            inert:1
+        }
+    },
     HTMLFormElement:{
         prototype:{
             reportValidity:1,
