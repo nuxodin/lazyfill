@@ -1,5 +1,5 @@
 
-if ('inert' in HTMLElement.prototype) {
+if (!('inert' in HTMLElement.prototype)) {
 
   Object.defineProperty(HTMLElement.prototype, 'inert', {
     enumerable: true,
