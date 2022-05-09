@@ -14,6 +14,7 @@ if (!Element.prototype.isVisible) {
         while (oParent) {
             const style = getComputedStyle(oParent);
             if (style.getPropertyValue('content-visibility') === 'hidden') return false;
+            console.log(oParent)
             oParent = this.offsetParent;
         }
 
