@@ -14,8 +14,7 @@ if (!Element.prototype.isVisible) {
         while (oParent) {
             const style = getComputedStyle(oParent);
             if (style.getPropertyValue('content-visibility') === 'hidden') return false;
-            console.log(oParent)
-            oParent = this.offsetParent;
+            oParent = oParent.offsetParent;
         }
 
         // If the checkAriaHidden dictionary member of options is true, and this is hidden (in the ARIA sense), return false. (removed from spec?)
