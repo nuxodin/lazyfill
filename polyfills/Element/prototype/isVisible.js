@@ -8,6 +8,8 @@ if (!Element.prototype.isVisible) {
         if (!this.offsetParent) return false;
         if (this.offsetWidth === 0 || this.offsetHeight === 0) return false;
 
+        const style = getComputedStyle(this);
+        
         // If a shadow-inclusive ancestor of this has content-visibility: hidden, return false.
         // can we skip "this"? It probably won't make offsetHeight.
         let oParent = this;
