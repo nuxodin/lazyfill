@@ -162,7 +162,8 @@ var lazyfills = {
     },
     Element:{
         prototype:{
-            toggleAttribute:1
+            toggleAttribute:1,
+	    isVisible:1,
         }
     },
     HTMLElement:{
