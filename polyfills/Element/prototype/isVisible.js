@@ -6,7 +6,7 @@ if (!Element.prototype.isVisible) {
 
         // If this does not have an associated layout box, return false.
         if (!this.offsetParent) return false;
-        if (this.offsetWidth === 0 || this.offsetHeight === 0) return false;
+        //if (this.offsetWidth === 0 || this.offsetHeight === 0) return false;
 
         const style = getComputedStyle(this);
         
