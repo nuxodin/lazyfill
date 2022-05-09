@@ -55,6 +55,7 @@ Add this script on the top of your page:
    <li>
       Element
       <ul>
+         <li>isVisible
          <li>matches
          <li>closest
          <li>prepend
