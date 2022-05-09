@@ -8,9 +8,18 @@ if (!Element.prototype.isVisible) {
         if (!this.offsetParent) return false;
         if (this.offsetWidth === 0 || this.offsetHeight === 0) return false;
 
-        const style = getComputedStyle(this);
         // If a shadow-inclusive ancestor of this has content-visibility: hidden, return false.
+        const style = getComputedStyle(this);
         if (style.getPropertyValue('content-visibility') === 'hidden') return false;
+        
+        // If a shadow-inclusive ancestor of this has content-visibility: hidden, return false.
+        // can we skip "this"? It probably won't make offsetHeight.
+        let oParent = this;
+        while (oParent) {
+            const style = getComputedStyle(oParent);
+            if (style.getPropertyValue('content-visibility') === 'hidden') return false;
+            oParent = this.offsetParent;
+        }
 
         // If the checkAriaHidden dictionary member of options is true, and this is hidden (in the ARIA sense), return false. (removed from spec?)
 
