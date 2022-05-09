@@ -9,10 +9,6 @@ if (!Element.prototype.isVisible) {
         if (this.offsetWidth === 0 || this.offsetHeight === 0) return false;
 
         // If a shadow-inclusive ancestor of this has content-visibility: hidden, return false.
-        const style = getComputedStyle(this);
-        if (style.getPropertyValue('content-visibility') === 'hidden') return false;
-        
-        // If a shadow-inclusive ancestor of this has content-visibility: hidden, return false.
         // can we skip "this"? It probably won't make offsetHeight.
         let oParent = this;
         while (oParent) {
