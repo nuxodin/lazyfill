@@ -182,6 +182,11 @@ var lazyfills = {
             reportValidity:1
         }
     },
+    HTMLSlotElement:{
+        prototype:{
+            assignedElements:1
+        }
+    },
     Math:{
         trunc:1,
         sign:1,
