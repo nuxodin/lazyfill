@@ -1,10 +1,10 @@
-!function(){
+!function(){ 'use strict';
     var lastBtn = null
-    document.addEventListener('click',function(e){
+    addEventListener('click',function(e){
         if (!e.target.closest) return;
         lastBtn = e.target.closest('button, input[type=submit]');
     }, true);
-    document.addEventListener('submit',function(e){
+    addEventListener('submit',function(e){
         if ('submitter' in e) return;
         var canditates = [document.activeElement, lastBtn];
         lastBtn = null;
