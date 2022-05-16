@@ -10,7 +10,7 @@ var ending = '.min.js';
 if (!NodeList.prototype.forEach) NodeList.prototype.forEach = Array.prototype.forEach; // ie11
 if (!document.scrollingElement) document.scrollingElement = document.documentElement; // ie11
 if (!window.crypto) window.crypto = window.msCrypto; // ie11
-
+if (!window.SubmitEvent) window.SubmitEvent = Event; // safari v?
 
 var urls = {
     'cdn.jsdelivr.net/npm/cookie-store@3.0.0/index.min.js': {
