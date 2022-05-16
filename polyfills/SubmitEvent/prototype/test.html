@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <title>SubmitEvent prototype test</title>
+    <script src="./submitter.js"></script>
+
+<body>
+
+    <form onsubmit="console.log(event.submitter); event.preventDefault()">
+        <input type="text" name="text" value="">
+        <button>send</button>
+        <button>send 2</button>
+    </form>
