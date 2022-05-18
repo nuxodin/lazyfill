@@ -70,6 +70,7 @@ Add this script on the top of your page:
          <li>getElementsByClassName
          <li>children
          <li>toggleAttribute
+         <li>scrollIntoViewIfNeeded
       </ul>
    <li>
       Array
