@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Element prototype tests</title>
+    <script src="./scrollIntoViewIfNeeded.js" type=module></script>
+<body>
+
+    <script>
+        if (!document.body.scrollIntoViewIfNeeded) {
+            document.write('<div style="color:red">polyfill needed</div>');
+        } else {
+            document.write('<div style="color:green">polyfill not needed</div>');
+        }
+    </script>
+
+    <div style="position:sticky; top:0; left:0; right:0">
+        <button id=button onclick="bottom.scrollIntoViewIfNeeded()">scrollIntoViewIfNeeded();</button>
+        <br>
+        <button id=button onclick="bottom.scrollIntoViewIfNeeded(true)">scrollIntoViewIfNeeded(true) (default)</button>
+        <br>
+        <button id=button onclick="bottom.scrollIntoViewIfNeeded(false)">scrollIntoViewIfNeeded(false)</button>
+    </div>
+
+    <div style="height:100vh">
+        <br>
+        There is more 🔽
+    </div>
+
+    <div style="height:250vh; display:grid; place-items:center">
+        <div id=bottom style="background:red; height:200px">
+            bottom
+        </div>
+    </div>
