@@ -1,7 +1,7 @@
 !function(window, document){ 'use strict';
 // other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire
 
-var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.6.3/';
+var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.6.4/';
 var ending = '.min.js';
 
 //var root = 'localhost/github/lazyfill/'; var ending = '.js';
@@ -163,7 +163,8 @@ var lazyfills = {
     Element:{
         prototype:{
             toggleAttribute:1,
-	    isVisible:1,
+            isVisible:1,
+            scrollIntoViewIfNeeded:1,
         }
     },
     HTMLElement:{
