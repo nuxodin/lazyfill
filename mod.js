@@ -253,7 +253,7 @@ function addFsStruct(obj, realObj, rootUrl){
             urls[url][prop].push(realObj);
         } else {
 	    if (realObj[prop]===undefined) {
-	    	console.warn('lazyfill: real Object not defined to polyfill:'+obj[prop]);
+	    	console.warn('lazyfill: real Object not defined to polyfill:'+prop);
 	    } else {
 	        addFsStruct(obj[prop], realObj[prop], rootUrl + prop + '/');
 	    }
