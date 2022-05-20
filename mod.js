@@ -1,7 +1,7 @@
 !function(window, document){ 'use strict';
 // other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire
 
-var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.6.6/';
+var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.6.7/';
 var ending = '.min.js';
 
 //var root = 'localhost/github/lazyfill/'; var ending = '.js';
@@ -26,7 +26,7 @@ var urls = {
     'polyfill.io/v3/polyfill.min.js?features=IntersectionObserver':{
         'IntersectionObserver':[window]
     },
-    'polyfill.io/v3/polyfill.min.js?features=ResizeObserver':{
+    'cdn.jsdelivr.net/npm/@juggle/resize-observer@3.3.1/lib/exports/resize-observer.umd.js':{ // dit not work: 'polyfill.io/v3/polyfill.min.js?features=ResizeObserver'
         'ResizeObserver':[window]
     },
     'polyfill.io/v3/polyfill.min.js?features=AbortController':{
