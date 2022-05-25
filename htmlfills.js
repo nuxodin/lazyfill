@@ -73,18 +73,27 @@ var polyfills = {
         js: 'https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@0.5.7/dist/dialog-polyfill.min.js',
         //js: 'https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dist/dialog-polyfill.min.js',
         //css: 'https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dialog-polyfill.css',
-        onfound: function(el){
-            dialogPolyfill.registerDialog(el);
-        }
-    }
+        //onfound: function(el){
+        //    dialogPolyfill.registerDialog(el);
+        //}
+    },
+    "[focusgroup]": { // waiting for but to fix: https://github.com/MicrosoftEdge/MSEdgeExplainers/pull/581
+        supports: 'focusgroup' in document.head,
+        js: 'https://cdn.jsdelivr.net/gh/MicrosoftEdge/MSEdgeExplainers/Focusgroup/focusgroup_polyfill.js',
+    },
+    "[inert]": {
+        supports: Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'inert')?.enumerable === true, // hacky test, mod.js adds inert property support
+        js: 'https://cdn.jsdelivr.net/npm/wicg-inert/dist/inert.min.js',
+    },
 }
 
 Object.keys(polyfills).forEach(function(selector){
     var data = polyfills[selector];
     if (data.supports) return;
+    console.log(selector, data.supports)
     onElement(selector, function (el) {
         onScript(data.js, function(){
-            data.onfound(el)
+            data.onfound && data.onfound(el)
         });
     });
 });
