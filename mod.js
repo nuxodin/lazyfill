@@ -253,7 +253,7 @@ function addFsStruct(obj, realObj, rootUrl){
             urls[url][prop].push(realObj);
         } else {
             if (realObj[prop]===undefined) {
-                console.warn('lazyfill: Object '+prop+' not defined to polyfill its properties');
+                console.warn('💊 lazyfill: Object '+prop+' not defined to polyfill its properties!');
             } else {
                 addFsStruct(obj[prop], realObj[prop], rootUrl + prop + '/');
             }
@@ -290,7 +290,7 @@ output += '</ul>'
 console.log(output)
 /* */
 
-console.log('lazyfill: getters added');
+console.log('💊 lazyfill: getters added, ready!');
 
 function addCombo(url, obj, target) {
     var prop;
@@ -324,7 +324,7 @@ function addGetters(url, props) {
                 // try { throw new Error(); } catch (e) { console.log(e.stack) } // track where it has been added
                 //delete obj[prop];
                 deleteGetters(); // we have to delete all assigned getters for a url, otherwise the script is parsed anew with every polyfill!
-                console.log(prop+' needed > loading sync, you may want to add the polyfill '+url);
+                console.log('💊 lazyfill: "'+prop+'" polyfilled (sync!), you need the polyfill '+url);
 
                 // umd
                 window.exports = {};
@@ -397,7 +397,7 @@ function loadScriptSync(path) {
         document.documentElement.firstChild.appendChild(elem);
         elem.setAttribute('data-src',path);
     } else {
-        console.warn('lazyfill: load failed '+path)
+        console.warn('💊 lazyfill: load failed '+path)
     }
 }
 function loadScriptAsync(path) {
