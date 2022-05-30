@@ -1,81 +1,11 @@
-!function (window, document) { 'use strict';
+import {SelectorObserver} from 'https://cdn.jsdelivr.net/gh/u1ui/SelectorObserver.js@2.0.1/SelectorObserver.min.js'
 
-
-/* onElement */
-var listeners = [],
-    root = document,
-    Observer;
-
-function qsa(el, selector) {
-    try {
-        return el.querySelectorAll(selector);
-    } catch (e) {
-        return [];
-    }
-}
-function onElement(selector, callback) {
-    var listener = {
-        selector: selector,
-        callback: callback,
-        elements: new WeakMap(),
-    };
-    var els = qsa(root, listener.selector), i = 0, el;
-    while (el = els[i++]) {
-        listener.elements.set(el, true);
-        listener.callback.call(el, el);
-    }
-    listeners.push(listener);
-    if (!Observer) {
-        Observer = new MutationObserver(checkMutations);
-        Observer.observe(root, {
-            childList: true,
-            subtree: true
-        });
-    }
-    checkListener(listener);
-}
-function checkListener(listener, target) {
-    var i = 0, el, els = [];
-    try {
-        target && target.matches(listener.selector) && els.push(target);
-    } catch (e) { }
-    if (loaded) { // ok? check inside node on innerHTML - only when loaded
-        Array.prototype.push.apply(els, qsa(target || root, listener.selector));
-    }
-    while (el = els[i++]) {
-        if (listener.elements.has(el)) continue;
-        listener.elements.set(el, true);
-        listener.callback.call(el, el);
-    }
-}
-function checkListeners(inside) {
-    var i = 0, listener;
-    while (listener = listeners[i++]) checkListener(listener, inside);
-}
-function checkMutations(mutations) {
-    var j = 0, i, mutation, nodes, target;
-    while (mutation = mutations[j++]) {
-        nodes = mutation.addedNodes, i = 0;
-        while (target = nodes[i++]) target.nodeType === 1 && checkListeners(target);
-    }
-}
-var loaded = false;
-document.addEventListener('DOMContentLoaded', function () {
-    loaded = true;
-});
-/* /onElement */
-
-//var rootSrc = 'https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.6.7/polyfills/html/';
+const scripts = {};
 
 var polyfills = {
     dialog: {
         supports: 'HTMLDialogElement' in window,
         js: 'https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@0.5.7/dist/dialog-polyfill.min.js',
-        //js: 'https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dist/dialog-polyfill.min.js',
-        //css: 'https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dialog-polyfill.css',
-        //onfound: function(el){
-        //    dialogPolyfill.registerDialog(el);
-        //}
     },
     "[focusgroup]": { // waiting for but to fix: https://github.com/MicrosoftEdge/MSEdgeExplainers/pull/581
         supports: 'focusgroup' in document.head,
@@ -87,19 +17,32 @@ var polyfills = {
     },
 }
 
-Object.keys(polyfills).forEach(function(selector){
+Object.keys(polyfills).forEach(selector => {
     var data = polyfills[selector];
     if (data.supports) return;
-    console.log(selector, data.supports)
-    onElement(selector, function (el) {
-        onScript(data.js, function(){
-            data.onfound && data.onfound(el)
+
+    /*
+    SO.once(selector, el => {
+        onScript(data.js, () => {
+            console.log('💊 lazyfill: "'+selector+'" polyfilled, you need the polyfill: '+data.js);
+            //data.onfound && data.onfound(el)
         });
     });
+    */
+
+    const obs = new SelectorObserver({
+        on: (el) => {
+            onScript(data.js, () => {
+                console.log('💊 lazyfill: "'+selector+'" polyfilled, you need the polyfill: '+data.js);
+                //data.onfound && data.onfound(el)
+            });
+            obs.disconnect();
+        },
+    })
+    obs.observe(selector);
 });
 
 
-var scripts = {};
 function onScript(path, cb){
     if (!scripts[path]) {
         scripts[path] = {
@@ -108,7 +51,7 @@ function onScript(path, cb){
         loadScript(path, function(){
             scripts[path].callbacks.forEach(cb);
             scripts[path].loaded = true;;
-        })
+        });
     }
     if (scripts[path].loaded) cb();
     else scripts[path].callbacks.push(cb);
@@ -121,7 +64,3 @@ function loadScript(path, cb, eb) {
     elem.onerror = eb;
     document.documentElement.firstChild.appendChild(elem);
 }
-
-
-
-}(window, document);
