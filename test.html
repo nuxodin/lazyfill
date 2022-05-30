@@ -4,16 +4,16 @@
   <meta charset="UTF-8">
   <title>Level.css TEST</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="./mod.js"></script>
-  <script src="./htmlfills.js"></script>
+  <script src="./mod.js" xtype=module></script>
+  <script src="./htmlfills.js" type=module></script>
 </head>
 <body>
 
 
 
-<script style="display:block; white-space: pre-wrap; background:#eee; margin:1rem; padding:1rem;">
+<script style="display:block; white-space: pre-wrap; background:#eee; margin:1rem; padding:1rem;" type=module>
 
-var body = document.body;
+const body = document.body;
 
 body.innerHTML += 'no polyfill loaded so far.<br>';
 
@@ -39,7 +39,7 @@ setTimeout(function(){
 
 /* is connected tests */
 
-div = document.createElement('div');
+const div = document.createElement('div');
 console.log(div.isConnected);
 document.body.appendChild(div)
 console.log(div.isConnected);
