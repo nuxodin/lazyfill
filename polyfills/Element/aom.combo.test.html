@@ -2,49 +2,85 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Element prototype tests</title>
+    <title>Element.computedRole polyfill test</title>
     <script src="./aom.combo.js"></script>
 <body>
 
-
-    <table id="tabelEl">
-        <thead>
-            <tr>
-                <th>cell
-                <th>cell
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>cell
-                <td>cell
-            </tr>
-            <tr>
-                <td>cell
-                <td>cell
-            </tr>
-        </table>
+<header>
+    <h1>Here the header</h1>
+</header>
+<main>Main</main>
+<article>
+    <h2>h1 inside article</h2>
+</article>
+<div>div</div>
+<hr>
+<table>
+    <thead>
+        <tr>
+            <th>cell
+            <th>cell
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>cell
+            <td>cell
+        </tr>
+        <tr>
+            <td>cell
+            <td>cell
+        </tr>
     </table>
+</table>
+<form>
+    <input type="text" name="text" value="text">
+    <input type="checkbox" name="checkbox" value="checkbox">
+    <input type="radio" name="radio" value="radio">
+    <input type="submit" name="submit" value="submit">
+</form>
+<section>section</section>
+<footer>footer</footer>
 
-    <div>div</div>
-    <section>section</section>
 
-
-    <hr>
 
     <script>
-        let table = document.createElement('table');
-        let all = document.querySelectorAll('*')
-        for (el of all) {
-            let tr = document.createElement('tr')
-            let td = document.createElement('td');
-            td.textContent = el.tagName;
-            tr.appendChild(td);
-            td = document.createElement('td');
-            td.textContent = el.computedRole;
-            tr.appendChild(td);
-            table.appendChild(tr);
+
+    let level = 0;
+
+    function drawElement(el){
+        let tr = document.createElement('tr')
+        let td = document.createElement('td');
+        td.style.cssText = 'white-space: pre; font-family: monospace;';
+
+        td.innerHTML = ' '.repeat(level*2)+'&lt;<span style="color:blue">'+el.tagName.toLowerCase()+'</span>';
+        for (let attr of el.attributes) {
+            td.innerHTML += ' <span style="color:hotpink">'+attr.name + '</span>="' + attr.value + '"';
         }
-        document.body.append(table);
+        td.innerHTML += '&gt;';
+
+        tr.appendChild(td);
+        td = document.createElement('td');
+        td.textContent = el.computedRole;
+        tr.appendChild(td);
+
+        td = document.createElement('td');
+        td.textContent = el.computedName;
+        tr.appendChild(td);
+
+        table.appendChild(tr);
+
+        for (let child of el.children) {
+            level++;
+            drawElement(child);
+            level--;
+        }
+    }
+
+    let table = document.createElement('table');
+    table.innerHTML = `<tr style="font-weight:bold"><td>Element<td>computedRole<td>computedName`;
+    table.style.cssText = 'background:#eee;';
+    drawElement(document.documentElement);
+    document.body.append(table);
 
     </script>
