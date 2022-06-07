@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Element prototype tests</title>
+    <script src="./aom.combo.js"></script>
+<body>
+
+
+    <table id="tabelEl">
+        <thead>
+            <tr>
+                <th>cell
+                <th>cell
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>cell
+                <td>cell
+            </tr>
+            <tr>
+                <td>cell
+                <td>cell
+            </tr>
+        </table>
+    </table>
+
+    <div>div</div>
+    <section>section</section>
+
+
+    <hr>
+
+    <script>
+        let table = document.createElement('table');
+        let all = document.querySelectorAll('*')
+        for (el of all) {
+            let tr = document.createElement('tr')
+            let td = document.createElement('td');
+            td.textContent = el.tagName;
+            tr.appendChild(td);
+            td = document.createElement('td');
+            td.textContent = el.computedRole;
+            tr.appendChild(td);
+            table.appendChild(tr);
+        }
+        document.body.append(table);
+
+    </script>
