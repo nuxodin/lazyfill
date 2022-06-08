@@ -87,7 +87,20 @@ addCombo(root+'polyfills/Element/combo'+ending, {
     children:1,
 }, Element.prototype);
 
-/*
+
+/* set methods, stage 2
+addCombo('cdn.jsdelivr.net/npm/set-extensions@1.5.0/dist/index'+ending, {
+    intersection:1,
+    union:1,
+    difference:1,
+    symmetricDifference:1,
+    isSubsetOf:1,
+    isDisjointFrom:1,
+    isSupersetOf:1,
+}, Set.prototype);
+*/
+
+/* iterator helpers, stage 2
 var getPrototypeOf = Object.getPrototypeOf;
 var AsyncIteratorPrototype = getPrototypeOf(getPrototypeOf(getPrototypeOf((async function* () {})()[Symbol.asyncIterator]())));
 var IteratorPrototype = getPrototypeOf(getPrototypeOf([][Symbol.iterator]()));
