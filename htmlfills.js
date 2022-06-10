@@ -1,4 +1,4 @@
-import {SelectorObserver} from 'https://cdn.jsdelivr.net/gh/u1ui/SelectorObserver.js@2.0.1/SelectorObserver.min.js'
+import {SelectorObserver} from 'https://cdn.jsdelivr.net/gh/u1ui/SelectorObserver.js@3.0.1/SelectorObserver.min.js'
 
 const scripts = {};
 
@@ -13,7 +13,7 @@ var polyfills = {
     },
     "[inert]": {
         supports: Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'inert')?.enumerable === true, // hacky test, mod.js adds inert property support
-        js: 'https://cdn.jsdelivr.net/npm/wicg-inert/dist/inert.min.js',
+        js: 'https://cdn.jsdelivr.net/npm/wicg-inert@3.1.2/dist/inert.min.js',
     },
 }
 
