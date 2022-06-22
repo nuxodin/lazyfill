@@ -160,6 +160,7 @@ var lazyfills = {
     },
     CSS:{
         escape:1,
+        registerProperty:1,
         supports:1,
     },
     document:{
