@@ -4,7 +4,7 @@ Polyfill Service - the lazy way
 
 
 Polyfills **are loaded on demand**, only when they are needed 😲  
-Initial **3Kb** to polyfill a lot of Stuff.  
+Initial **3Kb** to polyfill a lot of Stuff!  
 
 # Ussage
 
