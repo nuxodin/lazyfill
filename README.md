@@ -10,7 +10,7 @@ Initial **3Kb** to polyfill a lot of Stuff!
 
 Add this script on the top of your page:
 ```html
-<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.1/mod.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.2/mod.min.js"></script>
 ```
 **done!**
 
@@ -178,7 +178,12 @@ Add this script on the top of your page:
          <li>randomUUID
       </ul>
 </ul>
-
+<ul>
+   <li>addEventListener signal options
+   <li>focus options
+   <li>classList force toggle 
+   <li>Element.contains(TextNode) bug
+</ul>
 
 # How it works
 
