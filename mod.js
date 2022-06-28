@@ -376,6 +376,7 @@ var monkeyPatches = {
     focusOptions:1,
     elContainsText:1,
     forceToggle:1,
+    addEventListenerSignal:1,
 };
 var dummyEl = document.createElement('i');
 // focus options
@@ -393,8 +394,16 @@ var cl = dummyEl.classList;
 cl.toggle('test',false);
 if (!cl.contains('test')) delete monkeyPatches.forceToggle
 
+// addEventListener signal option
+dummyEl.addEventListener('click',()=>{}, {
+    get signal() {
+        delete monkeyPatches.addEventListenerSignal;
+    },
+});
+
 // load patches
 for (let patch in monkeyPatches) {
+    console.log(patch)
     loadScriptAsync('https://'+root + 'monkeyPatches/' + patch + ending, true);
 }
 

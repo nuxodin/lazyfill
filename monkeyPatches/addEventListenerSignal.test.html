@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+  <meta charset=UTF-8>
+  <meta name="viewport" content="width=device-width">
+
+  <script src="./addEventListenerSignal.js"></script>
+
+<body>
+<script>
+const controller = new AbortController();
+
+function handler(e){
+    console.log(e.type)
+}
+document.addEventListener('click', handler, { signal: controller.signal });
+document.addEventListener('mousedown', handler, { signal: controller.signal });
+</script>
+
+<button onclick="controller.abort()">abort (no more console entries)</button>
