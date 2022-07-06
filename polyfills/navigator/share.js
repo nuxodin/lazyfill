@@ -4,7 +4,7 @@
 const share = async function(data){
 
     if (!window.HTMLDialogElement) {
-        await import('https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@1.4.1/dialog.js');
+        await import('https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@1.4.1/dialog.min.js');
     }
 
     const dialog = document.createElement('dialog');
