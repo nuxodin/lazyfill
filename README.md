@@ -10,7 +10,7 @@ Initial **3Kb** to polyfill a lot of Stuff!
 
 Add this script on the top of your page:
 ```html
-<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.2/mod.min.js"></script>
+<script src="https://cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.3/mod.min.js"></script>
 ```
 **done!**
 
@@ -103,6 +103,11 @@ Add this script on the top of your page:
       <ul>
          <li>currentScript
          <li>caretRangeFromPoint
+      </ul>
+   <li>
+      navigator
+      <ul>
+         <li>share
       </ul>
    <li>
       Node

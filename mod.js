@@ -1,7 +1,7 @@
 !function(window, document){ 'use strict';
 // other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire
 
-var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.2/';
+var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.3/';
 var ending = '.min.js';
 
 //var root = 'localhost/github/lazyfill/'; var ending = '.js';
@@ -205,6 +205,9 @@ var lazyfills = {
     Math:{
         trunc:1,
         sign:1,
+    },
+    navigator:{
+        share:1
     },
     Number:{
         isInteger:1

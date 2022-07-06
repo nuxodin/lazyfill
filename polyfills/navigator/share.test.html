@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>navigator.share</title>
+
+    <script src="./share.js"></script>
+<body>
+
+
+<button id="t1">test 1</button>
+
+<script>
+t1.addEventListener('click', () => {
+    navigator.share({
+        title: document.title,
+        text: "Hello World",
+        url: window.location.href
+    }).then(() => console.log('Successful share'))
+    .catch(error => console.log('Error sharing:', error));
+});
+</script>
+
+
+<button id="t2">test 2 force polyfill</button>
+
+<script>
+t2.addEventListener('click', () => {
+    u1Share({
+        title: document.title,
+        text: "Hello World",
+        url: window.location.href
+    }).then(() => console.log('Successful share'))
+    .catch(error => console.log('Error sharing:', error));
+});
+</script>
