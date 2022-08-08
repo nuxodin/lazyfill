@@ -1,7 +1,7 @@
 !function(window, document){ 'use strict';
 // other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire
 
-var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.4/';
+var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.5/';
 var ending = '.min.js';
 
 //var root = 'localhost/github/lazyfill/'; var ending = '.js';
@@ -53,7 +53,11 @@ var urls = {
         'URLPattern':[window],
     },
     'unpkg.com/web-streams-polyfill@3.2.1/dist/polyfill.min.js':{
-	'ReadableStream':[window],
+	    'ReadableStream':[window],
+    },
+    'raw.githubusercontent.com/mozilla/sanitizer-polyfill/main/dist/sanitizer-polyfill.min.js':{ // todo
+	    'Sanitizer':[window],
+        'setHTML':[Element.prototype],
     },
 };
 

@@ -66,6 +66,11 @@ let S23 = new Set(['2','3']);
 console.log(S12.difference(S23))
 */
 
+var inputValue = `<p>hi! <svg/onload="alert(1)" />well <em>please</em> <a href="javascript:alert(2)" title="pretty-please">click me!</a>`;
+var contextEl = document.createElement('div');
+contextEl.setHTML(inputValue, { sanitizer: new Sanitizer() });
+console.log(contextEl.innerHTML)
+
 
 </script>
 
@@ -94,6 +99,5 @@ console.log(S12.difference(S23))
   <input type="checkbox">
   <input type="checkbox">
 </div>
-
 
 <button onclick="navigator.share({title:'title',text:'text',url:location.href})">share</button>
