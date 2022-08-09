@@ -55,7 +55,7 @@ var urls = {
     'unpkg.com/web-streams-polyfill@3.2.1/dist/polyfill.min.js':{
 	    'ReadableStream':[window],
     },
-    'raw.githubusercontent.com/mozilla/sanitizer-polyfill/main/dist/sanitizer-polyfill.min.js':{ // todo
+    'raw.githubusercontent.com/mozilla/sanitizer-polyfill/main/dist/sanitizer-polyfill.min.js':{
 	    'Sanitizer':[window],
         'setHTML':[Element.prototype],
     },
