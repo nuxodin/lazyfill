@@ -1,7 +1,7 @@
 !function(window, document){ 'use strict';
 // other libaries should check properties like so: if (prop in obj) { ... }; so the getter will not fire
 
-var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.5/';
+var root = 'cdn.jsdelivr.net/gh/nuxodin/lazyfill@1.7.6/';
 var ending = '.min.js';
 
 //var root = 'localhost/github/lazyfill/'; var ending = '.js';
@@ -60,6 +60,20 @@ var urls = {
         'setHTML':[Element.prototype],
     },
 };
+
+
+var path = 'cdn.jsdelivr.net/gh/tc39/proposal-change-array-by-copy@main/polyfill.min.js';
+addCombo(path, {
+    toReversed:1,
+    toSorted:1,
+    with:1,
+}, Object.getPrototypeOf(Int8Array.prototype));
+addCombo(path, {
+    toReversed:1,
+    toSorted:1,
+    with:1,
+    toSpliced:1,
+}, Array.prototype);
 
 addCombo('polyfill.io/v3/polyfill.min.js?features=Intl', {
     DateTimeFormat:{
@@ -135,8 +149,9 @@ var props = {
     zip:1,
 }
 console.log(IteratorPrototype)
-addCombo('cdn.jsdelivr.net/npm/iterator-polyfill@1.0.9/dist/index.min.js', props, IteratorPrototype);
-addCombo('cdn.jsdelivr.net/npm/iterator-polyfill@1.0.9/dist/index.min.js', props, AsyncIteratorPrototype);
+path = 'cdn.jsdelivr.net/npm/iterator-polyfill@1.0.9/dist/index.min.js';
+addCombo(path, props, IteratorPrototype);
+addCombo(path, props, AsyncIteratorPrototype);
 */
 
 
@@ -287,7 +302,6 @@ addFsStruct(lazyfills, window, root+'polyfills/');
 
 for (let url in urls) addGetters(url, urls[url]);
 
-
 /* To list polyfills in the readme: *
 //IteratorPrototype.name = 'Iterator';
 //AsyncIteratorPrototype.name = 'AsyncIterator';
@@ -302,12 +316,12 @@ Object.values(urls).forEach(function(props){
         })
     })
 });
-let output = '<ul>';
+let output = '\n<ul>';
 Object.entries(supports).map(([obj, props])=>{
-    output += '<li>'+obj
-    output += '<ul>'+props.map(prop => `<li>${prop}\n`).join('')+'</ul>';
+    output += '\n   <li>'+obj
+    output += '\n   <ul>'+props.map(prop => `\n      <li>${prop}`).join('')+'\n   </ul>';
 })
-output += '</ul>'
+output += '\n</ul>'
 console.log(output)
 /* */
 
@@ -352,7 +366,6 @@ function addGetters(url, props) {
                 window.module = true; // todo: needed by umd but i dont know why?
 
                 loadScriptSync('https://'+url);
-//loadScriptSync('http://'+url);
 
                 if (!this[prop]) this[prop] = exports[prop]; // todo: loop exports?
 
