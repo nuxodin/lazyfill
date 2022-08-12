@@ -193,6 +193,14 @@ Add this script on the top of your page:
    </ul>
 </ul>
 
+<ul>
+   <li>addEventListener signal options
+   <li>focus options
+   <li>classList force toggle 
+   <li>Element.contains(TextNode) bug
+</ul>
+
+
 # How it works
 
 To every polyfillable property, the scripts adds a getter which **synchronously** loads the corresponding polyfill.  
