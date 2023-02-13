@@ -55,7 +55,8 @@ var urls = {
     'unpkg.com/web-streams-polyfill@3.2.1/dist/polyfill.min.js':{
 	    'ReadableStream':[window],
     },
-    'raw.githubusercontent.com/mozilla/sanitizer-polyfill/main/dist/sanitizer-polyfill.min.js':{
+    //'raw.githubusercontent.com/mozilla/sanitizer-polyfill/main/dist/sanitizer-polyfill.min.js':{
+    'mozilla.github.io/sanitizer-polyfill/dist/sanitizer-polyfill.min.js':{
 	    'Sanitizer':[window],
         'setHTML':[Element.prototype],
     },
@@ -198,6 +199,7 @@ var lazyfills = {
             toggleAttribute:1,
             isVisible:1,
             scrollIntoViewIfNeeded:1,
+            replaceChildren:1,
         }
     },
     HTMLElement:{
