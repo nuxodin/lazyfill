@@ -220,6 +220,8 @@ Any help is greatly appreciated.
 
 # Thanks / Resources
 
+https://github.com/es-shims
+
 https://github.com/behnammodi/polyfill
 
 https://polyfill.io/v3/
