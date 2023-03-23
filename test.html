@@ -92,14 +92,19 @@ console.log([1,2,3].toReversed());
 
 <div inert>
   <h2>inert</h2>
-  text selectable?
-  <input value="focusable?">
+  <label>
+    text selectable?
+    <input value="focusable?">
+  </label>
 </div>
 
 <div focusgroup>
   <h2>focusgroup</h2>
-  <input type="checkbox">
-  <input type="checkbox">
+  <label>
+    arrow navigatable?
+    <input type="checkbox">
+    <input type="checkbox">
+  </label>
 </div>
 
 <button onclick="navigator.share({title:'title',text:'text',url:location.href})">share</button>

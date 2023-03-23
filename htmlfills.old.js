@@ -14,7 +14,7 @@ function qsa(el, selector) {
     }
 }
 function onElement(selector, callback) {
-    var listener = {
+    const listener = {
         selector: selector,
         callback: callback,
         elements: new WeakMap(),
@@ -59,7 +59,7 @@ function checkMutations(mutations) {
         while (target = nodes[i++]) target.nodeType === 1 && checkListeners(target);
     }
 }
-var loaded = false;
+let loaded = false;
 document.addEventListener('DOMContentLoaded', function () {
     loaded = true;
 });
@@ -82,7 +82,7 @@ const polyfills = {
     },
     "[inert]": {
         supports: Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'inert')?.enumerable === true, // hacky test, mod.js adds inert property support
-        js: 'https://cdn.jsdelivr.net/npm/wicg-inert/dist/inert.min.js',
+        js: 'https://cdn.jsdelivr.net/npm/wicg-inert@3.1.2/dist/inert.min.js',
     },
 }
 
