@@ -69,7 +69,7 @@ document.addEventListener('DOMContentLoaded', function () {
 var polyfills = {
     dialog: {
         supports: 'HTMLDialogElement' in window,
-        js: 'https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@0.5.7/dist/dialog-polyfill.min.js',
+        js: 'https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@1.4.1/dist/dialog-polyfill.min.js',
         //js: 'https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dist/dialog-polyfill.min.js',
         //css: 'https://cdn.jsdelivr.net/npm/dialog-polyfill@0.5.6/dialog-polyfill.css',
         //onfound: function(el){

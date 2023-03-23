@@ -1,11 +1,11 @@
-import {SelectorObserver} from 'https://cdn.jsdelivr.net/gh/u1ui/SelectorObserver.js@3.0.1/SelectorObserver.min.js'
+import {SelectorObserver} from 'https://cdn.jsdelivr.net/gh/u1ui/SelectorObserver.js@3.6.0/SelectorObserver.min.js'
 
 const scripts = {};
 
-var polyfills = {
+const polyfills = {
     dialog: {
         supports: 'HTMLDialogElement' in window,
-        js: 'https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@0.5.7/dist/dialog-polyfill.min.js',
+        js: 'https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@1.4.1/dialog.min.js',
     },
     "[focusgroup]": { // waiting for but to fix: https://github.com/MicrosoftEdge/MSEdgeExplainers/pull/581
         supports: 'focusgroup' in document.head,
@@ -14,22 +14,13 @@ var polyfills = {
     "[inert]": {
         supports: Object.getOwnPropertyDescriptor(HTMLElement.prototype, 'inert')?.enumerable === true, // hacky test, mod.js adds inert property support
         js: 'https://cdn.jsdelivr.net/npm/wicg-inert@3.1.2/dist/inert.min.js',
+        //js: 'https://unpkg.com/wicg-inert@3.1.2/dist/inert.min.js',
     },
 }
 
 Object.keys(polyfills).forEach(selector => {
-    var data = polyfills[selector];
+    const data = polyfills[selector];
     if (data.supports) return;
-
-    /*
-    SO.once(selector, el => {
-        onScript(data.js, () => {
-            console.log('💊 lazyfill: "'+selector+'" polyfilled, you need the polyfill: '+data.js);
-            //data.onfound && data.onfound(el)
-        });
-    });
-    */
-
     const obs = new SelectorObserver({
         on: (el) => {
             onScript(data.js, () => {
@@ -57,7 +48,7 @@ function onScript(path, cb){
     else scripts[path].callbacks.push(cb);
 }
 function loadScript(path, cb, eb) {
-    var elem = document.createElement('script');
+    const elem = document.createElement('script');
     elem.async   = false;
     elem.src     = path;
     elem.onload  = cb;
