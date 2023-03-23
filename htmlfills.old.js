@@ -66,7 +66,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /* /onElement */
 
 
-var polyfills = {
+const polyfills = {
     dialog: {
         supports: 'HTMLDialogElement' in window,
         js: 'https://cdn.jsdelivr.net/gh/nuxodin/dialog-polyfill@1.4.1/dist/dialog-polyfill.min.js',
@@ -87,7 +87,7 @@ var polyfills = {
 }
 
 Object.keys(polyfills).forEach(function(selector){
-    var data = polyfills[selector];
+    const data = polyfills[selector];
     if (data.supports) return;
     console.log(selector, data.supports)
     onElement(selector, function (el) {
@@ -98,7 +98,7 @@ Object.keys(polyfills).forEach(function(selector){
 });
 
 
-var scripts = {};
+const scripts = {};
 function onScript(path, cb){
     if (!scripts[path]) {
         scripts[path] = {
@@ -113,7 +113,7 @@ function onScript(path, cb){
     else scripts[path].callbacks.push(cb);
 }
 function loadScript(path, cb, eb) {
-    var elem = document.createElement('script');
+    const elem = document.createElement('script');
     elem.async   = false;
     elem.src     = path;
     elem.onload  = cb;
