@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <script src="./mod.js" xtype=module></script>
   <script src="./htmlfills.js" type=module></script>
+  <link rel=stylesheet href="https://cdn.jsdelivr.net/gh/u1ui/norm.css@latest/norm.css">
 </head>
 <body>
 
@@ -106,5 +107,14 @@ console.log([1,2,3].toReversed());
     <input type="checkbox">
   </label>
 </div>
+
+<search style="border:1px solid blue">
+  inside search element.
+  It sould be block and have a role=search
+  <label>
+    Input
+    <input>
+  </label>
+</search>
 
 <button onclick="navigator.share({title:'title',text:'text',url:location.href})">share</button>

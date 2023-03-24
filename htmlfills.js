@@ -16,6 +16,10 @@ const polyfills = {
         js: 'https://cdn.jsdelivr.net/npm/wicg-inert@3.1.2/dist/inert.min.js',
         //js: 'https://unpkg.com/wicg-inert@3.1.2/dist/inert.min.js',
     },
+    "search": {
+        supports: window.HTMLSearchElement,
+        js: (el)=> el.setAttribute('role', 'search'),
+    },
 }
 
 Object.keys(polyfills).forEach(selector => {
@@ -23,11 +27,16 @@ Object.keys(polyfills).forEach(selector => {
     if (data.supports) return;
     const obs = new SelectorObserver({
         on: (el) => {
-            onScript(data.js, () => {
-                console.log('💊 lazyfill: "'+selector+'" polyfilled, you need the polyfill: '+data.js);
-                //data.onfound && data.onfound(el)
-            });
-            obs.disconnect();
+            if (data.js instanceof Function) {
+                data.js(el);
+            }
+            else {
+                onScript(data.js, () => {
+                    console.log('💊 lazyfill: "'+selector+'" polyfilled, you need the polyfill: '+data.js);
+                    //data.onfound && data.onfound(el)
+                });
+                obs.disconnect();
+            }
         },
     })
     obs.observe(selector);
