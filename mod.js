@@ -369,7 +369,7 @@ function addGetters(url, props) {
 
                 loadScriptSync('https://'+url);
 
-                if (!this[prop]) this[prop] = exports[prop]; // todo: loop exports?
+                //if (!this[prop]) this[prop] = exports[prop]; // todo: loop exports?
                 // new: polyfill the prototype, not the instance, ok?
                 if (!obj[prop]) obj[prop] = exports[prop]; // todo: loop exports?
 
