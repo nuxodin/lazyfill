@@ -369,10 +369,9 @@ function addGetters(url, props) {
 
                 loadScriptSync('https://'+url);
 
-console.log('hier:', this, obj)
                 if (!this[prop]) this[prop] = exports[prop]; // todo: loop exports?
                 // new: polyfill the prototype, not the instance, ok?
-                //if (!obj[prop]) obj[prop] = exports[prop]; // todo: loop exports?
+                if (!obj[prop]) obj[prop] = exports[prop]; // todo: loop exports?
 
                 //if (this[prop] === undefined) console.error('lazyfill: the polyfill should have added the property "'+prop+'"');
                 return this[prop];
