@@ -42,13 +42,12 @@ var urls = {
         Temporal:[window],
         temporal:[window],
     },
-    /**/
     'unpkg.com/@ungap/custom-elements@0.1.15/es.js':{
         'customElements':[window],
     },
-    'cdn.jsdelivr.net/gh/nuxodin/structured-clone@2.4.0/index.min.js':{
-        'structuredClone':[window],
-    },
+    // 'cdn.jsdelivr.net/gh/nuxodin/structured-clone@2.4.0/index.min.js':{ // makes problems in safari
+    //     'structuredClone':[window],
+    // },
     'cdn.jsdelivr.net/npm/urlpattern-polyfill@1.0.0-rc5/dist/index.umd.js':{
         'URLPattern':[window],
     },
@@ -359,22 +358,17 @@ function addGetters(url, props) {
             configurable: true,
             get: function() {
                 // try { throw new Error(); } catch (e) { console.log(e.stack) } // track where it has been added
-                //delete obj[prop];
                 deleteGetters(); // we have to delete all assigned getters for a url, otherwise the script is parsed anew with every polyfill!
                 console.log('💊 lazyfill: "'+prop+'" polyfilled (sync!), you need the polyfill '+url);
 
                 // umd
                 window.exports = {};
                 window.module = true; // todo: needed by umd but i dont know why?
-
                 loadScriptSync('https://'+url);
-
-                //if (!this[prop]) this[prop] = exports[prop]; // todo: loop exports?
-                //return this[prop];
-
+                // if (!this[prop]) this[prop] = exports[prop]; // todo: loop exports?
                 // new: polyfill the prototype, not the instance, ok?
                 if (!obj[prop]) obj[prop] = exports[prop]; // todo: loop exports?
-                return obj[prop];
+                return this[prop];
             },
             set: function(v) {
                 //deleteGetters();
