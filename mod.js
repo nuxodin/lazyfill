@@ -370,11 +370,11 @@ function addGetters(url, props) {
                 loadScriptSync('https://'+url);
 
                 //if (!this[prop]) this[prop] = exports[prop]; // todo: loop exports?
+                //return this[prop];
+
                 // new: polyfill the prototype, not the instance, ok?
                 if (!obj[prop]) obj[prop] = exports[prop]; // todo: loop exports?
-
-                //if (this[prop] === undefined) console.error('lazyfill: the polyfill should have added the property "'+prop+'"');
-                return this[prop];
+                return obj[prop];
             },
             set: function(v) {
                 //deleteGetters();
