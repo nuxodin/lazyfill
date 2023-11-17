@@ -20,14 +20,16 @@ const share = async function(data){
         },200);
     }
 
+    const buildText = (...parts) => parts.filter(Boolean).join('\n\n');
     const payload = {
         title: enc(data.title),
         text: enc(data.text),
         url: enc(data.url),
-        titleText: enc(data.title+'\n\n'+data.text),
-        titleTextUrl: enc(data.title+'\n\n'+data.text+'\n\n'+data.url),
-        textUrl: enc(data.text+'\n\n'+data.url),
+        titleText: enc(buildText(data.title, data.text)+'\n'),
+        titleTextUrl: enc(buildText(data.title, data.text, data.url)+'\n'),
+        textUrl: enc(buildText(data.text, data.url)+'\n'),
     }
+
     document.body.append(dialog);
     dialog.showModal();
     dialog.classList.add('-Open');
