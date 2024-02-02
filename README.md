@@ -161,6 +161,7 @@ Add this script on the top of your page:
    <ul>
       <li>allSettled
       <li>any
+      <li>withResolvers
    </ul>
    <li>RegExp
    <ul>

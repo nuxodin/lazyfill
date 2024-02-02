@@ -242,7 +242,8 @@ var lazyfills = {
     },
     Promise:{
         allSettled:1,
-        any:1
+        any:1,
+        withResolvers:1,
     },
     RegExp:{
         prototype:{
