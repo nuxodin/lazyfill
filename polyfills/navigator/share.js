@@ -42,8 +42,11 @@ const share = async function(data){
         name = txt[name] || name;
         const a = document.createElement('a');
         a.innerHTML = item.svg+name;
+        // not mentoned in screenreader
+        a.firstElementChild.setAttribute('aria-hidden',true);
         a.href = item.url ? item.url(payload) : '';
         a.target = 'share_poly';
+        a.tabindex = 0;
         a.addEventListener('click',e=>{
             if (item.click) item.click(data);
             else window.open(a.href, 'share_poly', 'width=700,height=500');
